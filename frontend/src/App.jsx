@@ -1,7 +1,15 @@
+import Navbar from './Components/Navbar';
+
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <h1>Pc Paradise</h1>
+      </main>
+      <footer></footer>
     </>
   );
 }
