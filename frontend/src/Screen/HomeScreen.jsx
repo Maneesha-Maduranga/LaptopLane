@@ -31,12 +31,12 @@ function HomeScreen() {
             : ` bg-white z-20 ease-in-out duration-500 fixed right-[-100%]`
         }
       >
-        <div class=' ml-auto flex h-full  max-w-xs flex-col  py-4 pb-12 '>
-          <div class='flex items-center justify-between px-4'>
-            <h2 class='text-lg font-medium text-gray-900'>Filters</h2>
+        <div className=' ml-auto flex h-full  max-w-xs flex-col  py-4 pb-12 '>
+          <div className='flex items-center justify-between px-4'>
+            <h2 className='text-lg font-medium text-gray-900'>Filters</h2>
             <button
               type='button'
-              class='-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400'
+              className='-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400'
               onClick={() => {
                 setShowFillter(!showFillter);
               }}
@@ -111,7 +111,7 @@ function HomeScreen() {
           <div className='w-3/4 container mx-auto px-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 '>
             {fillterProcesser.map((laptop) => (
               <div key={laptop.id}>
-                <ProductCard />
+                <ProductCard laptop={laptop} />
               </div>
             ))}
           </div>

@@ -1,6 +1,6 @@
+import { Outlet } from 'react-router-dom';
 import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
-import HomeScreen from './Screen/HomeScreen';
 
 function App() {
   return (
@@ -8,8 +8,8 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main>
-        <HomeScreen />
+      <main className='mt-14'>
+        <Outlet />
       </main>
       <footer>
         <Footer />
