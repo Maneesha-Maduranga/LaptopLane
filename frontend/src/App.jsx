@@ -1,4 +1,6 @@
+import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
+import HomeScreen from './Screen/HomeScreen';
 
 function App() {
   return (
@@ -7,9 +9,11 @@ function App() {
         <Navbar />
       </header>
       <main>
-        <h1>Pc Paradise</h1>
+        <HomeScreen />
       </main>
-      <footer></footer>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }

@@ -7,8 +7,8 @@ function Navbar() {
   return (
     <>
       {/* Large View */}
-      <div className='navbar flex justify-around items-center h-16 w-full bg-sky-200 font-black'>
-        <div className='logo'>Pc Paradise</div>
+      <div className='navbar flex justify-around items-center h-16 w-full bg-slate-900 text-white font-black'>
+        <div className='logo text-amber-400 text-2xl font-bold'>LaptopLane</div>
         <ul className='flex items-center'>
           <li className='px-4'>Home</li>
           <li className='px-4'>Product</li>
