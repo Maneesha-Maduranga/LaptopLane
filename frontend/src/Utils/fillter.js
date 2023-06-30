@@ -58,10 +58,12 @@ export const fillterProcesser = [
   {
     id: 1,
     title: 'Intel Celeron',
+    rating: 6,
   },
   {
     id: 2,
     title: 'Intel Core I3',
+    rating: 6,
   },
   {
     id: 3,
@@ -70,17 +72,21 @@ export const fillterProcesser = [
   {
     id: 4,
     title: 'Intel Core I7',
+    rating: 8,
   },
   {
     id: 5,
     title: 'Intel Core I9',
+    rating: 10,
   },
   {
     id: 6,
     title: 'AMD Ryzen 5',
+    rating: 6,
   },
   {
     id: 7,
     title: 'AMD Ryzen 7',
+    rating: 6,
   },
 ];

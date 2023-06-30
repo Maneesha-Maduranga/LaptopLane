@@ -8,7 +8,7 @@ function App() {
       <header>
         <Navbar />
       </header>
-      <main className='mt-14'>
+      <main className='mt-10'>
         <Outlet />
       </main>
       <footer>
