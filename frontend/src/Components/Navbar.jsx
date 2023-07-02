@@ -15,7 +15,9 @@ function Navbar() {
           <Link to='/' className='px-4'>
             Home
           </Link>
-          <li className='px-4'>Product</li>
+          <Link to='/products' className='px-4'>
+            Products
+          </Link>
         </ul>
         <ul className='flex items-center'>
           <li className='px-4 hidden md:block'>Cart</li>

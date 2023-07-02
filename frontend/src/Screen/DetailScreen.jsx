@@ -1,9 +1,24 @@
 import Rating from '../Components/Rating';
 import { BiComment, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function DetailScreen() {
+  const [laptop, setLaptop] = useState({});
   const [quantity, setQuantity] = useState(1);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await axios.get(`/api/laptop/${id}`);
+      const { data } = await response.data;
+      // console.log(data);
+      setLaptop(data);
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <section>
@@ -11,8 +26,8 @@ function DetailScreen() {
         <div className='grid grid-cols-1 items-start gap-8 md:grid-cols-2'>
           <div className='w-auto'>
             <img
-              alt='Les Paul'
-              src='https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+              alt={laptop.name}
+              src={laptop.image}
               className='aspect-square w-full rounded-xl object-cover'
             />
           </div>
@@ -20,27 +35,23 @@ function DetailScreen() {
           <div className='sticky top-0'>
             <div className='mt-8 flex justify-between'>
               <div className='max-w-[35ch] space-y-2'>
-                <h1 className='text-xl font-bold sm:text-2xl'>
-                  HP ENVY x360 14-es0013dx Core i5 13th Gen Touch Screen 2-in-1
-                  Laptop
-                </h1>
+                <h1 className='text-xl font-bold sm:text-2xl'>{laptop.name}</h1>
 
                 <div className='-ms-0.5 flex'>
                   <Rating />
                 </div>
               </div>
 
-              <p className='text-lg font-bold'>රු275,000.00</p>
+              <p className='text-lg font-bold'>{`රු: ${laptop.price}}`}</p>
             </div>
 
             <div className='mt-4'>
               <ul className='list-disc list-inside text-gray-900'>
-                <li>13th Generation Intel Core i5-1335U Processor</li>
-                <li>14″ FHD IPS Touch Screen 250 nits, 45% NTSC</li>
-                <li>512 GB PCIe NVMe SSD</li>
-                <li>8 GB DDR4-3200 Memory</li>
-                <li>3-cell, 51 Wh Li-ion</li>
-                <li>Windows 11 Home</li>
+                <li>{laptop.processor}</li>
+                <li>{laptop.ram}</li>
+                <li>{laptop.storage}</li>
+                <li>{laptop.graphics}</li>
+                <li>{laptop.battery}</li>
               </ul>
             </div>
 

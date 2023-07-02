@@ -11,14 +11,16 @@ import {
   Route,
 } from 'react-router-dom';
 
-import HomeScreen from './Screen/HomeScreen.jsx';
+import ProductScreen from './Screen/ProductScreen.jsx';
 import DetailScreen from './Screen/DetailScreen.jsx';
+import HomeScreen from './Screen/HomeScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index element={<HomeScreen />} />
-      <Route path='/:id' element={<DetailScreen />} />
+      <Route path='/products' element={<ProductScreen />} />
+      <Route path='/products/:id' element={<DetailScreen />} />
     </Route>
   )
 );
