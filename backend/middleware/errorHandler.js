@@ -6,13 +6,18 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({ error: 'Bad Object Id', sucess: false });
   }
 
+  if (err.name == 'ValidationError') {
+    let errMasg = err.errors.name.properties.message
+      ? err.errors.name.properties.message
+      : 'Validation Failed';
+    return res.status(400).json({ error: errMasg, sucess: false });
+  }
+
   if (err.code && err.code == 11000) {
-    return res
-      .status(400)
-      .json({
-        error: `Already Used UserName try Used Another Values`,
-        sucess: false,
-      });
+    return res.status(400).json({
+      error: `Already Used UserName try Used Another Values`,
+      sucess: false,
+    });
   }
 
   if (err instanceof CustomError) {

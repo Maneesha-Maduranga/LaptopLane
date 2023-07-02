@@ -49,7 +49,7 @@ const loginUser = async (req, res) => {
   }
 
   let tokenUser = {
-    id: user._id.toString(),
+    id: user._id,
     name: user.username,
     email: user.email,
     role: user.role,
