@@ -12,7 +12,7 @@ const getAllLaptop = async (req, res) => {
 const getSingleLaptop = async (req, res) => {
   const { id } = req.params;
 
-  const laptop = await Laptop.findById(id);
+  const laptop = await Laptop.findById(id).populate('reviews');
 
   if (!laptop) {
     throw new CustomError('No Laptop Found With Given ID', 404);
@@ -47,7 +47,6 @@ const createLaptop = async (req, res) => {
     colours,
     stock,
     description,
-    reviews,
   } = req.body;
 
   let laptop = await Laptop.create({
@@ -66,7 +65,6 @@ const createLaptop = async (req, res) => {
     general: { os: os, model: model, colours: colours },
     stock: Number(stock),
     description: description,
-    reviews: reviews,
     user: req.user.id,
   });
 
@@ -76,17 +74,20 @@ const createLaptop = async (req, res) => {
   });
 };
 
-const updateLaptop = async (req, res) => {
-  res.status(200).json({
-    sucess: true,
-    data: 'Update Laptop',
-  });
-};
-
 const deleteLaptop = async (req, res) => {
+  const { id } = req.params;
+
+  let laptop = await Laptop.findById({ _id: id });
+
+  if (!laptop) {
+    throw new CustomError('No Laptop found With Given Id', 404);
+  }
+
+  await laptop.deleteOne();
+
   res.status(200).json({
     sucess: true,
-    data: 'Delete Laptop',
+    data: 'Product Deleted',
   });
 };
 
@@ -101,7 +102,7 @@ module.exports = {
   getAllLaptop,
   getSingleLaptop,
   createLaptop,
-  updateLaptop,
+
   deleteLaptop,
   uploadImageLaptop,
 };

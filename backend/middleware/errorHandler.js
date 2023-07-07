@@ -7,9 +7,9 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (err.name == 'ValidationError') {
-    let errMasg = err.errors.name.properties.message
-      ? err.errors.name.properties.message
-      : 'Validation Failed';
+    let errMasg = Object.values(err.errors)
+      .map((item) => item.message)
+      .join(',');
     return res.status(400).json({ error: errMasg, sucess: false });
   }
 

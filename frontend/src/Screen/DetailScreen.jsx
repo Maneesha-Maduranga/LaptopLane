@@ -2,89 +2,77 @@ import Rating from '../Components/Rating';
 import { BiComment, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+
+import { useGetLaptopDetailQuery } from '../slices/laptopApiSlice';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from '../slices/cartSlice';
 
 function DetailScreen() {
-  const [laptop, setLaptop] = useState({});
-  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   const { id } = useParams();
+  const { data, isLoading } = useGetLaptopDetailQuery(id);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await axios.get(`/api/laptop/${id}`);
-      const { data } = await response.data;
-      // console.log(data);
-      setLaptop(data);
+  let lap;
+
+  if (!isLoading) {
+    lap = {
+      _id: data.data._id,
+      name: data.data.name,
+      price: data.data.price,
+      image: data.data.image,
     };
-    fetchProducts();
-  }, []);
+  }
 
-  return (
+  const handleAddToCart = () => {
+    dispatch(addToCart(lap));
+  };
+
+  return isLoading ? (
+    <h1>Hll</h1>
+  ) : (
     <section>
       <div className='relative mx-auto max-w-screen-xl px-4 py-8'>
         <div className='grid grid-cols-1 items-start gap-8 md:grid-cols-2'>
           <div className='w-auto'>
             <img
-              alt={laptop.name}
-              src={laptop.image}
+              alt={data.data.name}
+              src={data.data.image}
               className='aspect-square w-full rounded-xl object-cover'
             />
           </div>
 
           <div className='sticky top-0'>
-            <div className='mt-8 flex justify-between'>
-              <div className='max-w-[35ch] space-y-2'>
-                <h1 className='text-xl font-bold sm:text-2xl'>{laptop.name}</h1>
-
-                <div className='-ms-0.5 flex'>
-                  <Rating />
-                </div>
+            <div className='mt-3 flex flex-col items-start gap-4'>
+              <div className='max-w-[35ch]'>
+                <h1 className='text-xl font-bold sm:text-2xl'>
+                  {data.data.name}
+                </h1>
               </div>
-
-              <p className='text-lg font-bold'>{`රු: ${laptop.price}}`}</p>
+              <div>
+                <Rating />
+              </div>
+              <div>
+                <p className='text-lg  font-bold'>{`රු: ${data.data.price}`}</p>
+              </div>
             </div>
 
             <div className='mt-4'>
               <ul className='list-disc list-inside text-gray-900'>
-                <li>{laptop.processor}</li>
-                <li>{laptop.ram}</li>
-                <li>{laptop.storage}</li>
-                <li>{laptop.graphics}</li>
-                <li>{laptop.battery}</li>
+                <li>{data.data.processor}</li>
+                <li>{data.data.ram}</li>
+                <li>{data.data.storage}</li>
+                <li>{data.data.graphics}</li>
+                <li>{data.data.battery}</li>
               </ul>
             </div>
 
-            <div className='mt-8 flex gap-4'>
-              <div>
-                <button
-                  onClick={() => {
-                    if (quantity == 0) {
-                      return;
-                    }
-                    setQuantity(quantity - 1);
-                  }}
-                >
-                  <BiChevronLeft />
-                </button>
-                <input
-                  type='number'
-                  readOnly
-                  value={quantity}
-                  className='w-12 rounded border-2 border-slate-600 py-3 text-center text-xs [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none'
-                />
-                <button
-                  onClick={() => {
-                    setQuantity(quantity + 1);
-                  }}
-                >
-                  <BiChevronRight />
-                </button>
-              </div>
-
+            <div className='mt-8 flex justify-center'>
               <button
                 type='submit'
                 className='border-2 rounded-full text-white bg-slate-900 p-3'
+                onClick={handleAddToCart}
               >
                 Add to Cart
               </button>

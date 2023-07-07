@@ -20,13 +20,18 @@ const registerUser = async (req, res) => {
 
   user = await User.create({ username, email, password });
 
-  let tokenUser = { name: user.username, email: user.email, role: user.role };
+  let tokenUser = {
+    id: user._id,
+    name: user.username,
+    email: user.email,
+    role: user.role,
+  };
 
   sendCookie(res, tokenUser);
 
   res.status(200).json({
     sucess: true,
-    data: user,
+    data: tokenUser,
   });
 };
 
@@ -59,7 +64,7 @@ const loginUser = async (req, res) => {
 
   res.status(200).json({
     sucess: true,
-    data: 'Login Sucess',
+    data: tokenUser,
   });
 };
 

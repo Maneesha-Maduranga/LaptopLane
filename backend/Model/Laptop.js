@@ -68,18 +68,19 @@ const LaptopSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    reviews: {
-      type: Number,
-      required: true,
-    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'User  is Required Field'],
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+LaptopSchema.virtual('reviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'laptop',
+});
 
 const Laptop = mongoose.model('Laptop', LaptopSchema);
 

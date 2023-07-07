@@ -1,10 +1,31 @@
 import { useState } from 'react';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSignOutMutation } from '../slices/authApiSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import { removeUser } from '../slices/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const [showNav, setShowNav] = useState(true);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
+  const { total } = useSelector((state) => state.cart);
+  const [signOut] = useSignOutMutation();
+  const dispatch = useDispatch();
+
+  const handleSignout = async () => {
+    try {
+      const res = await signOut().unwrap();
+      dispatch(removeUser());
+      toast.success('Sign Out');
+      navigate('/');
+    } catch (error) {
+      toast.warn('Please  Try again');
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -20,8 +41,27 @@ function Navbar() {
           </Link>
         </ul>
         <ul className='flex items-center'>
-          <li className='px-4 hidden md:block'>Cart</li>
-          <li className='px-4 hidden md:block'>Log In</li>
+          <Link to='/cart' className='px-4 hidden md:block'>
+            Cart
+            {total > 0 && (
+              <span className='inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full'>
+                {total}
+              </span>
+            )}
+          </Link>
+          {user ? (
+            <>
+              <Link className='px-4 hidden md:block'>Profile</Link>
+              <Link className='px-4 hidden md:block' onClick={handleSignout}>
+                Sign Out
+              </Link>
+            </>
+          ) : (
+            <Link to='/auth/signin' className='px-4 hidden md:block'>
+              Sign In
+            </Link>
+          )}
+
           <li
             className='px-4 block md:hidden'
             onClick={() => {
@@ -38,16 +78,35 @@ function Navbar() {
       </div>
       {/* Mobile View */}
 
-      <ul
+      <div
         className={
           showNav
             ? 'hidden'
-            : `flex justify-evenly items-center h-12 mt-16 bg-sky-100 `
+            : `absolute md:hidden p-6 rounded-lg bg-slate-900 left-6 right-6 top-20 z-20 opacity-90`
         }
       >
-        <li className='px-4 '>Cart</li>
-        <li className='px-4 '>Log In</li>
-      </ul>
+        <div className='flex flex-col items-center justify-center w-full space-y-6 font-bold text-white rounded-sm'>
+          <Link to='/cart' className='px-4 border-b-2 border-b-gray-50'>
+            Cart
+          </Link>
+
+          {user ? (
+            <>
+              <Link className='px-4 border-b-2 border-b-gray-50'>Profile</Link>
+              <Link
+                onClick={handleSignout}
+                className='px-4 border-b-2 border-b-gray-50'
+              >
+                Sign Out
+              </Link>
+            </>
+          ) : (
+            <Link to='auth/signin' className='px-4 border-b-2 border-b-gray-50'>
+              Sign In
+            </Link>
+          )}
+        </div>
+      </div>
     </>
   );
 }

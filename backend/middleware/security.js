@@ -25,9 +25,10 @@ const roleAccess = (...rest) => {
 };
 
 const authorization = (user, id) => {
+  // console.log(user.id, id);
   if (user.role == 'admin') {
     return;
-  } else if (user.id == id) {
+  } else if (user.id == id.toString()) {
     return;
   } else {
     throw new CustomError('Fobbiden', 403);

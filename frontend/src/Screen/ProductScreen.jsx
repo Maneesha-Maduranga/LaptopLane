@@ -16,23 +16,17 @@ import SearchBar from '../Components/SearchBar';
 import Selection from '../Components/Selection';
 import Sorting from '../Components/Sorting';
 import ProductCard from '../Components/ProductCard';
+import Skeleton from '../Components/Skeleton';
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+
+import { useGetLaptopQuery } from '../slices/laptopApiSlice';
 
 function ProductScreen() {
   const [showFillter, setShowFillter] = useState(false);
-  const [laptops, setLaptops] = useState([]);
+  const loadArray = [1, 2, 3, 4, 5, 6, , 7, 8, 9, 10, 11, 12];
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await axios.get('/api/laptop');
-      const { data } = await response.data;
-      // console.log(data);
-      setLaptops(data);
-    };
-    fetchProducts();
-  }, []);
+  const { data: data, isLoading, isError } = useGetLaptopQuery();
 
   return (
     <>
@@ -121,11 +115,21 @@ function ProductScreen() {
 
           {/* Products Grid */}
           <div className='w-3/4 container mx-auto px-4  grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 '>
-            {laptops.map((laptop) => (
-              <div key={laptop._id}>
-                <ProductCard laptop={laptop} />
-              </div>
-            ))}
+            {/* Is Loading */}
+            {isLoading &&
+              loadArray.map((load) => (
+                <div key={load}>
+                  <Skeleton />
+                </div>
+              ))}
+
+            {/* Display Data */}
+            {!isLoading &&
+              data.data.map((laptop) => (
+                <div key={laptop._id}>
+                  <ProductCard laptop={laptop} />
+                </div>
+              ))}
           </div>
         </div>
       </div>
