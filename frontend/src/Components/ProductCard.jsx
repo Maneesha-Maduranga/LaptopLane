@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function ProductCard({ laptop }) {
   return (
     <Link
-      to={`/products/${laptop._id}`}
+      to={`/products/details/${laptop._id}`}
       className='group relative block overflow-hidden border-2 border-b-gray-200'
     >
       <button className='absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75'>

@@ -21,12 +21,16 @@ import Skeleton from '../Components/Skeleton';
 import { useState } from 'react';
 
 import { useGetLaptopQuery } from '../slices/laptopApiSlice';
+import { useParams } from 'react-router-dom';
+import Paginate from '../Components/Paginate';
 
 function ProductScreen() {
+  const { page } = useParams();
+
   const [showFillter, setShowFillter] = useState(false);
   const loadArray = [1, 2, 3, 4, 5, 6, , 7, 8, 9, 10, 11, 12];
 
-  const { data: data, isLoading, isError } = useGetLaptopQuery();
+  const { data: data, isLoading, isError } = useGetLaptopQuery({ page });
 
   return (
     <>
@@ -93,7 +97,7 @@ function ProductScreen() {
 
         <div className='flex'>
           {/* Fillter Section */}
-          <div className='w-1/4 hidden lg:block border-r-2 px-2'>
+          <div className='w-1/4 hidden lg:block border-r-2  px-3'>
             <form className='mt-4 flex flex-col  gap-4'>
               <SearchBar />
 
@@ -107,7 +111,7 @@ function ProductScreen() {
 
               <Sorting name='FILTER BY BRAND' products={fillterBrand} />
 
-              <button className='border-2 rounded-full text-white bg-slate-900 p-2'>
+              <button className='border-2 rounded-full text-white bg-slate-900 p-2 my-2'>
                 Clear Fillters
               </button>
             </form>
@@ -131,6 +135,9 @@ function ProductScreen() {
                 </div>
               ))}
           </div>
+        </div>
+        <div className='my-4'>
+          {!isLoading && <Paginate count={data.count} pages={data.pages} />}
         </div>
       </div>
     </>
