@@ -2,10 +2,53 @@ const { Laptop } = require('../Model/Laptop');
 const CustomError = require('../Utiils/customError');
 
 const getAllLaptop = async (req, res) => {
-  const laptops = await Laptop.find({});
+  const { search, brand, catergory, processor, ram, sort } = req.query;
+
+  let quearyOption = {};
+
+  if (search) {
+    quearyOption.name = new RegExp(search, 'i');
+  }
+  if (brand) {
+    quearyOption.brand = brand;
+  }
+  if (catergory) {
+    quearyOption.catergory = catergory;
+  }
+  if (processor) {
+    quearyOption.processor = new RegExp(processor, 'i');
+  }
+  if (ram) {
+    quearyOption.ram = new RegExp(ram, 'i');
+  }
+
+  let result = Laptop.find(quearyOption);
+
+  if (sort == 'lowtoHigh') {
+    result = result.sort('price');
+  }
+  if (sort == 'HightoLow') {
+    result = result.sort('-price');
+  }
+
+  console.log(quearyOption);
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 6;
+  const skip = (page - 1) * limit;
+
+  result = result.skip(skip).limit(limit);
+
+  const laptops = await result;
+
+  const allLaptops = await Laptop.countDocuments(quearyOption);
+  const pages = Math.ceil(allLaptops / limit);
+
   res.status(200).json({
     sucess: true,
     data: laptops,
+    count: allLaptops,
+    pages: pages,
   });
 };
 
