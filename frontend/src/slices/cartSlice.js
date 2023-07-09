@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : { cartItems: [], amount: 0, total: 0 };
+  : { cartItems: [], amount: 0, total: 0, shippingAddress: {} };
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -10,6 +10,7 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
       state.total = 0;
+      state.amount = 0;
       localStorage.removeItem('cart');
     },
     removeItem: (state, action) => {
@@ -38,9 +39,14 @@ export const cartSlice = createSlice({
 
       localStorage.setItem('cart', JSON.stringify(state));
     },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, removeItem, clearCart } = cartSlice.actions;
+export const { addToCart, removeItem, clearCart, saveShippingAddress } =
+  cartSlice.actions;
 export default cartSlice.reducer;

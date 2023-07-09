@@ -5,15 +5,14 @@ const OrderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'User Is Required'],
+      required: [true, 'User  is Required Field'],
     },
     orderItems: [
       {
         name: { type: String, required: true },
-        qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        laptop: {
+        _id: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: 'Laptop',
@@ -23,10 +22,15 @@ const OrderSchema = new mongoose.Schema(
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
+      state: { type: String, required: true },
       postalCode: { type: String, required: true },
       country: { type: String, required: true },
     },
-    subtotal: {
+    amount: {
+      type: Number,
+      required: true,
+    },
+    total: {
       type: Number,
       required: true,
     },
@@ -49,7 +53,7 @@ const OrderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Order = mongoose.model('User', OrderSchema);
+const Order = mongoose.model('Order', OrderSchema);
 
 module.exports = {
   Order,

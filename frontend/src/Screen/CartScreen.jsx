@@ -21,7 +21,7 @@ function CartScreen() {
   };
 
   const handleCheckout = () => {
-    navigate('/auth/signin?redirect=checkout');
+    navigate('/auth/signin?redirect=/checkout');
   };
 
   return (

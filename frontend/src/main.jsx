@@ -25,6 +25,13 @@ import { Provider } from 'react-redux';
 import SignInScreen from './Screen/SignInScreen';
 import SignUpScreen from './Screen/SignUpScreen';
 import CartScreen from './Screen/CartScreen.jsx';
+import CheckoutScreen from './Screen/CheckoutScreen.jsx';
+import ProtectedLayout from './Layout/protectedLayout.jsx';
+import OrderDetailScreen from './Screen/OrderDetailScreen';
+import AdminLayout from './Layout/AdminLayout.jsx';
+import OrderScreen from './Screen/Admin/OrdersScreen.jsx';
+import UsersScreen from './Screen/Admin/UsersScreen.jsx';
+import ProductsScreen from './Screen/Admin/ProductsScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +42,15 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/auth/signin' element={<SignInScreen />} />
       <Route path='/auth/signup' element={<SignUpScreen />} />
+      <Route path='' element={<ProtectedLayout />}>
+        <Route path='/checkout' element={<CheckoutScreen />} />
+        <Route path='/orderDetail' element={<OrderDetailScreen />} />
+      </Route>
+      <Route path='' element={<AdminLayout />}>
+        <Route path='/admin/orders' element={<OrderScreen />} />
+        <Route path='/admin/products' element={<ProductsScreen />} />
+        <Route path='/admin/users' element={<UsersScreen />} />
+      </Route>
     </Route>
   )
 );

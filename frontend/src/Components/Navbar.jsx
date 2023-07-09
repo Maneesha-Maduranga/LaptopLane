@@ -6,9 +6,11 @@ import { useSignOutMutation } from '../slices/authApiSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import { removeUser } from '../slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import NavDropDown from './NavDropdown';
 
 function Navbar() {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
+
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const { total } = useSelector((state) => state.cart);
@@ -51,7 +53,12 @@ function Navbar() {
           </Link>
           {user ? (
             <>
-              <Link className='px-4 hidden md:block'>Profile</Link>
+              <Link className='px-4 hidden md:block'>{`Hello ${user.name}`}</Link>
+              {user.role === 'admin' && (
+                <div className='px-4 hidden md:block'>
+                  <NavDropDown />
+                </div>
+              )}
               <Link className='px-4 hidden md:block' onClick={handleSignout}>
                 Sign Out
               </Link>
@@ -81,8 +88,8 @@ function Navbar() {
       <div
         className={
           showNav
-            ? 'hidden'
-            : `absolute md:hidden p-6 rounded-lg bg-slate-900 left-6 right-6 top-20 z-20 opacity-90`
+            ? `absolute md:hidden p-6 rounded-lg bg-slate-900 left-6 right-6 top-20 z-20 opacity-90`
+            : 'hidden'
         }
       >
         <div className='flex flex-col items-center justify-center w-full space-y-6 font-bold text-white rounded-sm'>
@@ -93,6 +100,28 @@ function Navbar() {
           {user ? (
             <>
               <Link className='px-4 border-b-2 border-b-gray-50'>Profile</Link>
+              {user.role === 'admin' && (
+                <>
+                  <Link
+                    className='px-4 border-b-2 border-b-gray-50'
+                    to='/admin/products'
+                  >
+                    View Products
+                  </Link>
+                  <Link
+                    className='px-4 border-b-2 border-b-gray-50'
+                    to='/admin/orders'
+                  >
+                    View Orders
+                  </Link>
+                  <Link
+                    className='px-4 border-b-2 border-b-gray-50'
+                    to='/admin/users'
+                  >
+                    View Users
+                  </Link>
+                </>
+              )}
               <Link
                 onClick={handleSignout}
                 className='px-4 border-b-2 border-b-gray-50'
