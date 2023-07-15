@@ -5,6 +5,7 @@ const { authorization } = require('../middleware/security');
 
 const getAllUser = async (req, res) => {
   const users = await User.find({ role: 'user' }).select('-password');
+
   res.status(200).json({
     sucess: true,
     data: users,
@@ -23,13 +24,23 @@ const getsingleUser = async (req, res) => {
   });
 };
 const showUser = async (req, res) => {
-  let { name, email } = req.user;
+  let { name, email, id } = req.user;
+
+  const user = await User.findById({ _id: id })
+    .populate('orders')
+    .select('-password');
+
+  if (!user) {
+    throw new CustomError('No User find with Given Id', 404);
+  }
 
   res.status(200).json({
     sucess: true,
     data: {
       name,
       email,
+      id,
+      user,
     },
   });
 };

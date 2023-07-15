@@ -10,6 +10,11 @@ const LaptopSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Laptop Price is Required'],
     },
+    catergory: {
+      type: String,
+
+      required: [true, 'Catergory  is Required Field'],
+    },
     image: {
       type: String,
       default: 'photo',
@@ -18,7 +23,6 @@ const LaptopSchema = new mongoose.Schema(
       type: String,
       enum: {
         values: ['ASUS', 'HP', 'MSI', 'ACER', 'LENEVO', 'GIGABYTE'],
-        message: '{VALUE} is not supported',
       },
       required: true,
     },
@@ -52,14 +56,14 @@ const LaptopSchema = new mongoose.Schema(
       required: [true, 'Warrenty  is Required Field'],
     },
     display: {
-      displaytype: { type: String },
-      resolution: { type: String },
-      size: { type: String },
+      displaytype: { type: String, default: 'IPS' },
+      resolution: { type: String, default: 'FHD (1920 x 1080)' },
+      size: { type: String, default: '14.” Inches Display' },
     },
     general: {
-      os: { type: String },
+      os: { type: String, default: 'Windows' },
       model: { type: String },
-      colors: { type: String },
+      colors: { type: String, default: 'Black' },
     },
     stock: {
       type: Number,
@@ -67,6 +71,14 @@ const LaptopSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+    },
+    averageRating: {
+      type: Number,
+      default: 0,
+    },
+    numOfReviews: {
+      type: Number,
+      default: 0,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,

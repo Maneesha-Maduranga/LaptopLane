@@ -36,7 +36,7 @@ const createReviews = async (req, res) => {
   });
 
   if (commentedBefore) {
-    throw new CustomError('Commented Before', 400);
+    throw new CustomError('Already Reviewd', 400);
   }
 
   let review = await Review.create({

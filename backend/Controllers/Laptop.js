@@ -1,5 +1,6 @@
 const { Laptop } = require('../Model/Laptop');
 const CustomError = require('../Utiils/customError');
+const path = require('path');
 
 const getAllLaptop = async (req, res) => {
   const { search, brand, catergory, processor, ram, sort } = req.query;
@@ -30,8 +31,6 @@ const getAllLaptop = async (req, res) => {
   if (sort == 'HightoLow') {
     result = result.sort('-price');
   }
-
-  console.log(quearyOption);
 
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 6;
@@ -90,6 +89,7 @@ const createLaptop = async (req, res) => {
     colours,
     stock,
     description,
+    catergory,
   } = req.body;
 
   let laptop = await Laptop.create({
@@ -108,6 +108,7 @@ const createLaptop = async (req, res) => {
     general: { os: os, model: model, colours: colours },
     stock: Number(stock),
     description: description,
+    catergory: catergory,
     user: req.user.id,
   });
 
@@ -135,9 +136,26 @@ const deleteLaptop = async (req, res) => {
 };
 
 const uploadImageLaptop = async (req, res) => {
-  res.status(200).json({
+  let image;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    throw new CustomError('Please Upload File', 400);
+  }
+
+  image = req.files.image;
+
+  if (!image.mimetype.startsWith('image')) {
+    throw new CustomError('Please Upload Image', 400);
+  }
+
+  uploadPath = path.join(__dirname, '../public/images/' + `${image.name}`);
+
+  await image.mv(uploadPath);
+
+  res.status(201).json({
     sucess: true,
-    data: 'Uplaod image Laptop',
+    image: `/images/${image.name}`,
   });
 };
 
@@ -145,7 +163,6 @@ module.exports = {
   getAllLaptop,
   getSingleLaptop,
   createLaptop,
-
   deleteLaptop,
   uploadImageLaptop,
 };
