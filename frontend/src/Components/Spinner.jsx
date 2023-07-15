@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div className='text-center'>
+    <div className='text-center absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2'>
       <div role='status'>
         <svg
           aria-hidden='true'

@@ -29,15 +29,16 @@ import CheckoutScreen from './Screen/CheckoutScreen.jsx';
 import ProtectedLayout from './Layout/protectedLayout.jsx';
 import OrderDetailScreen from './Screen/OrderDetailScreen';
 import AdminLayout from './Layout/AdminLayout.jsx';
-import OrderScreen from './Screen/Admin/OrdersScreen.jsx';
-import UsersScreen from './Screen/Admin/UsersScreen.jsx';
+
 import ProductsScreen from './Screen/Admin/ProductsScreen.jsx';
+import AddProduct from './Screen/Admin/AddProducts.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index element={<HomeScreen />} />
       <Route path='/products/' element={<ProductScreen />} />
+
       <Route path='/products/page/:page' element={<ProductScreen />} />
       <Route path='/products/details/:id' element={<DetailScreen />} />
       <Route path='/cart' element={<CartScreen />} />
@@ -48,9 +49,8 @@ const router = createBrowserRouter(
         <Route path='/orderDetail' element={<OrderDetailScreen />} />
       </Route>
       <Route path='' element={<AdminLayout />}>
-        <Route path='/admin/orders' element={<OrderScreen />} />
         <Route path='/admin/products' element={<ProductsScreen />} />
-        <Route path='/admin/users' element={<UsersScreen />} />
+        <Route path='/admin/products/add' element={<AddProduct />} />
       </Route>
     </Route>
   )

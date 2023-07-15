@@ -1,10 +1,16 @@
 import Spinner from '../../Components/Spinner';
-import { useGetLaptopQuery } from '../../slices/laptopApiSlice';
+import { useGetLaptopAdminQuery } from '../../slices/laptopApiSlice';
 import { FiEdit, FiDelete } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 function ProductsScreen() {
-  const { data, isLoading } = useGetLaptopQuery();
+  const { data, isLoading } = useGetLaptopAdminQuery();
+  const navigate = useNavigate();
+  console.log(data);
 
+  const handleClick = () => {
+    navigate('/admin/products/add');
+  };
   return (
     <div className='flex flex-col  my-20 mx-10'>
       <div className='-m-1.5 overflow-x-auto'>
@@ -12,23 +18,11 @@ function ProductsScreen() {
           <div className='border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700'>
             {/* Search And ADD Btn */}
             <div className='flex items-center  justify-evenly flex-wrap py-3 px-4'>
-              <div className='relative max-w-xs'>
-                <label
-                  htmlFor='hs-table-with-pagination-search'
-                  className='sr-only'
-                >
-                  Search
-                </label>
-                <input
-                  type='text'
-                  name='hs-table-with-pagination-search'
-                  id='hs-table-with-pagination-search'
-                  className='p-3 pl-10 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                  placeholder='Search for items'
-                />
-              </div>
               <div>
-                <button className='block w-full rounded bg-slate-900 p-4 text-sm font-medium transition hover:scale-105 text-white'>
+                <button
+                  className='block w-full rounded bg-slate-900 p-4 text-sm font-medium transition hover:scale-105 text-white'
+                  onClick={handleClick}
+                >
                   Add Product
                 </button>
               </div>

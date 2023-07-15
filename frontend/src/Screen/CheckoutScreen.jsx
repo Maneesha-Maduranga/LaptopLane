@@ -21,10 +21,8 @@ function CheckoutScreen() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(shipaddress);
     dispatch(saveShippingAddress(shipaddress));
-  };
-
-  const handleClick = () => {
     navigate('/orderDetail');
   };
 
@@ -148,10 +146,7 @@ function CheckoutScreen() {
           </div>
 
           <div className='col-span-6'>
-            <button
-              className='block w-full rounded-md bg-slate-900 p-2.5 text-sm text-white transition hover:shadow-lg'
-              onClick={handleClick}
-            >
+            <button className='block w-full rounded-md bg-slate-900 p-2.5 text-sm text-white transition hover:shadow-lg'>
               Continue
             </button>
           </div>

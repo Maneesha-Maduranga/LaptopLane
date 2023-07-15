@@ -8,6 +8,8 @@ import { removeUser } from '../slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import NavDropDown from './NavDropdown';
 
+import logo from '../assets/logo.png';
+
 function Navbar() {
   const [showNav, setShowNav] = useState(false);
 
@@ -19,7 +21,7 @@ function Navbar() {
 
   const handleSignout = async () => {
     try {
-      const res = await signOut().unwrap();
+      await signOut().unwrap();
       dispatch(removeUser());
       toast.success('Sign Out');
       navigate('/');
@@ -33,13 +35,16 @@ function Navbar() {
     <>
       {/* Large View */}
       <div className='fixed top-0 navbar flex justify-around items-center h-16 w-full bg-slate-900 text-white font-black z-20'>
-        <div className='logo text-amber-400 text-2xl font-bold'>LaptopLane</div>
-        <ul className='flex items-center'>
+        <div className='logo text-lg font-bold'>
+          <span className=' text-amber-400 text-2xl md:text-3xl'>Laptop</span>
+          Lane
+        </div>
+        <ul className='flex items-center text-sm md:text-base'>
           <Link to='/' className='px-4'>
             Home
           </Link>
           <Link to='/products' className='px-4'>
-            Products
+            Laptops
           </Link>
         </ul>
         <ul className='flex items-center'>
@@ -76,9 +81,9 @@ function Navbar() {
             }}
           >
             {showNav ? (
-              <AiOutlineMenu size={28} />
-            ) : (
               <AiOutlineClose size={28} />
+            ) : (
+              <AiOutlineMenu size={28} />
             )}
           </li>
         </ul>
