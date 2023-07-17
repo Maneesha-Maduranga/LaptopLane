@@ -20,7 +20,7 @@ function ProductCard({ laptop }) {
       />
 
       <div className='relative border border-gray-100 bg-white p-6'>
-        <span className='whitespace-nowrap bg-amber-400 px-3 py-1.5 text-xs font-medium'>
+        <span className='whitespace-nowrap bg-sky-300 px-3 py-1.5 text-xs font-medium'>
           New
         </span>
 
@@ -32,7 +32,7 @@ function ProductCard({ laptop }) {
         <p className='mt-1.5 text-sm text-gray-700'>{laptop.name}</p>
 
         <form className='mt-4'>
-          <button className='block w-full rounded bg-slate-900 p-4 text-sm font-medium transition hover:scale-105 text-white'>
+          <button className='block w-full rounded bg-sky-500 p-4 text-sm font-medium transition hover:scale-105 text-white'>
             Add to Cart
           </button>
         </form>

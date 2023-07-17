@@ -19,8 +19,6 @@ function DetailScreen() {
 
   const [createReview, { isError }] = useCreateReviewMutation();
 
-  console.log(data);
-
   const [review, setReview] = useState({
     rating: 0,
     description: '',
@@ -43,6 +41,10 @@ function DetailScreen() {
   };
 
   const handleSubmit = async () => {
+    if (review.description == '') {
+      toast.error('Please Add Comment');
+      return;
+    }
     try {
       const { error } = await createReview(review);
       setReview({ rating: 0, description: '' });
@@ -98,7 +100,7 @@ function DetailScreen() {
             <div className='mt-8 '>
               <button
                 type='submit'
-                className='border-2 rounded-full text-white bg-slate-900 p-3'
+                className='border-2 rounded-full text-white bg-sky-400 p-3'
                 onClick={handleAddToCart}
               >
                 Add to Cart
@@ -156,7 +158,7 @@ function DetailScreen() {
           >
             <div className='flex flex-col gap-8 md:flex-row justify-around'>
               <ul className='space-y-3 text-sm'>
-                {data.data.reviews.length > 0 &&
+                {data.data.reviews.length > 0 ? (
                   data.data.reviews.map((review) => {
                     return (
                       <li
@@ -167,7 +169,15 @@ function DetailScreen() {
                         <span className='text-black'>{review.description}</span>
                       </li>
                     );
-                  })}
+                  })
+                ) : (
+                  <div
+                    className='p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400'
+                    role='alert'
+                  >
+                    No Reviews
+                  </div>
+                )}
               </ul>
               {user ? (
                 <form className='flex flex-col gap-2 border-2 p-2 md:w-1/2 border-gray-200'>

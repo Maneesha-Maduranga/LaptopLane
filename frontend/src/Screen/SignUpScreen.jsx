@@ -42,8 +42,8 @@ function SignUpScreen() {
         <h1 className='text-2xl font-bold sm:text-3xl'>Get started today!</h1>
 
         <p className='mt-4 text-gray-500'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-          nulla eaque error neque ipsa culpa autem, at itaque nostrum!
+          Create new account today to reap the benefits of a personalized
+          shopping experience.
         </p>
       </div>
 
@@ -126,7 +126,7 @@ function SignUpScreen() {
           <div>
             <button
               type='submit'
-              className='inline-block rounded-lg bg-slate-900 px-5 py-3 text-sm font-medium text-white'
+              className='inline-block rounded-lg bg-sky-600 px-5 py-3 text-sm font-medium text-white'
             >
               Sign Up
             </button>

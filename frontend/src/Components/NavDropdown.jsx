@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
-function NavDropDown({ show }) {
+function NavDropDown() {
   const [showDrop, setShowDrop] = useState(false);
 
   return (
@@ -33,22 +33,6 @@ function NavDropDown({ show }) {
             role='menuitem'
           >
             View Products
-          </Link>
-
-          <Link
-            to='/admin/orders'
-            className='block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700'
-            role='menuitem'
-          >
-            View Orders
-          </Link>
-
-          <Link
-            to='/admin/users'
-            className='block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700'
-            role='menuitem'
-          >
-            View Users
           </Link>
         </div>
       </div>

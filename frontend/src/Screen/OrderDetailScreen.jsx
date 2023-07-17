@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import Steps from '../Components/Steps';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+
 import { useCreateOrderMutation } from '../slices/orderApiSlice';
 
 function OrderDetailScreen() {

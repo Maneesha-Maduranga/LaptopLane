@@ -22,7 +22,7 @@ const LaptopSchema = new mongoose.Schema(
     brand: {
       type: String,
       enum: {
-        values: ['ASUS', 'HP', 'MSI', 'ACER', 'LENEVO', 'GIGABYTE'],
+        values: ['ASUS', 'HP', 'MSI', 'DELL', 'ACER', 'LENEVO', 'GIGABYTE'],
       },
       required: true,
     },

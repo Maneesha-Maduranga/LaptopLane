@@ -29,7 +29,8 @@ import CheckoutScreen from './Screen/CheckoutScreen.jsx';
 import ProtectedLayout from './Layout/protectedLayout.jsx';
 import OrderDetailScreen from './Screen/OrderDetailScreen';
 import AdminLayout from './Layout/AdminLayout.jsx';
-
+import AboutScreen from './Screen/AboutScreen.jsx';
+import ContactScreen from './Screen/ContactScreen.jsx';
 import ProductsScreen from './Screen/Admin/ProductsScreen.jsx';
 import AddProduct from './Screen/Admin/AddProducts.jsx';
 
@@ -38,7 +39,8 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route index element={<HomeScreen />} />
       <Route path='/products/' element={<ProductScreen />} />
-
+      <Route path='/about' element={<AboutScreen />} />
+      <Route path='/contact' element={<ContactScreen />} />
       <Route path='/products/page/:page' element={<ProductScreen />} />
       <Route path='/products/details/:id' element={<DetailScreen />} />
       <Route path='/cart' element={<CartScreen />} />
