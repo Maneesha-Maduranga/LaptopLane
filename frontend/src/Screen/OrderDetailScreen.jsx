@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Steps from '../Components/Steps';
 import { useSelector } from 'react-redux';
-
+import { api } from '../Utils/api';
 import { useNavigate } from 'react-router-dom';
 
 import { useCreateOrderMutation } from '../slices/orderApiSlice';
@@ -58,7 +58,7 @@ function OrderDetailScreen() {
                         <div key={item._id}>
                           <li className='flex items-center gap-4'>
                             <img
-                              src={item.image}
+                              src={`${api}/${item.image}`}
                               alt={item.name}
                               className='h-16 w-16 rounded object-cover'
                             />

@@ -2,6 +2,7 @@ import { AiOutlineDelete, AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, clearCart } from '../slices/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../Utils/api';
 
 import cartImg from '../assets/cart.png';
 import { useEffect } from 'react';
@@ -42,7 +43,7 @@ function CartScreen() {
                     <div key={item._id}>
                       <li className='flex items-center gap-4'>
                         <img
-                          src={item.image}
+                          src={`${api}/${item.image}`}
                           alt={item.name}
                           className='h-16 w-16 rounded object-cover'
                         />

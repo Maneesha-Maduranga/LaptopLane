@@ -12,7 +12,9 @@ const LaptopSchema = new mongoose.Schema(
     },
     catergory: {
       type: String,
-
+      enum: {
+        values: ['Gaming', 'Consumer', 'Business'],
+      },
       required: [true, 'Catergory  is Required Field'],
     },
     image: {
@@ -51,9 +53,9 @@ const LaptopSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Graphics  is Required Field'],
     },
-    warrenty: {
+    warranty: {
       type: String,
-      required: [true, 'Warrenty  is Required Field'],
+      required: [true, 'Warranty  is Required Field'],
     },
     display: {
       displaytype: { type: String, default: 'IPS' },

@@ -110,7 +110,6 @@ function ProductScreen() {
             <Sorting name='FILTER BY PROCESSOR' products={fillterProcesser} />
             <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
             <Sorting name='FILTER BY BRAND' products={fillterBrand} />
-            <PriceSlider />
           </form>
         </div>
       </div>
@@ -160,8 +159,6 @@ function ProductScreen() {
               <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
 
               <Sorting name='FILTER BY BRAND' products={fillterBrand} />
-
-              <PriceSlider />
 
               <button
                 className='flex items-center text-sm hover:text-gray-300'

@@ -8,7 +8,7 @@ import { useGetLaptopDetailQuery } from '../slices/laptopApiSlice';
 import { useCreateReviewMutation } from '../slices/reviewApiSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
-
+import { api } from '../Utils/api';
 function DetailScreen() {
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ function DetailScreen() {
   const { data, isLoading } = useGetLaptopDetailQuery(id);
 
   const [createReview, { isError }] = useCreateReviewMutation();
-
+  console.log(data);
   const [review, setReview] = useState({
     rating: 0,
     description: '',
@@ -62,25 +62,22 @@ function DetailScreen() {
     <Spinner />
   ) : (
     <section>
-      <div className='relative mx-auto max-w-screen-xl px-4 py-8'>
+      <div className='relative mx-auto max-w-screen-xl px-4 py-8 mt-4'>
         <div className='grid grid-cols-1 gap-2 place-items-center md:items-center  md:grid-cols-2'>
           <div className='w-auto'>
             <img
               alt={data.data.name}
-              src={data.data.image}
+              src={`${api}/${data.data.image}`}
               className='aspect-square rounded-xl object-cover'
             />
           </div>
 
           <div className='sticky top-0'>
-            <div className='mt-3 flex flex-col items-start gap-4'>
+            <div className='mt-3 flex flex-col items-start gap-1'>
               <div className='max-w-[35ch]'>
                 <h1 className='text-xl font-bold sm:text-2xl'>
                   {data.data.name}
                 </h1>
-              </div>
-              <div>
-                <Rating />
               </div>
               <div>
                 <p className='text-lg  font-bold'>{`රු: ${data.data.price}`}</p>
@@ -94,13 +91,34 @@ function DetailScreen() {
                 <li>{data.data.storage}</li>
                 <li>{data.data.graphics}</li>
                 <li>{data.data.battery}</li>
+                <li>{data.data.brand}</li>
+                <li>{data.data.warranty}</li>
               </ul>
             </div>
+            <form className='mt-8'>
+              <fieldset>
+                <legend className='mb-1 text-base font-medium'>
+                  Catergories
+                </legend>
+
+                <div className='flex flex-wrap gap-1'>
+                  <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
+                    {data.data.brand}
+                  </span>
+                  <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
+                    {data.data.catergory}
+                  </span>
+                  <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
+                    {data.data.processor}
+                  </span>
+                </div>
+              </fieldset>
+            </form>
 
             <div className='mt-8 '>
               <button
                 type='submit'
-                className='border-2 rounded-full text-white bg-sky-400 p-3'
+                className='text-white bg-sky-400 p-2 hover:bg-white hover:text-sky-400'
                 onClick={handleAddToCart}
               >
                 Add to Cart
@@ -132,7 +150,7 @@ function DetailScreen() {
               aria-controls='horizontal-alignment-2'
               role='tab'
             >
-              Reviews
+              Reviews {data.data.reviews > 0 ? 0 : data.data.reviews.length}
             </button>
           </nav>
         </div>
@@ -143,12 +161,7 @@ function DetailScreen() {
             role='tabpanel'
             aria-labelledby='horizontal-alignment-item-1'
           >
-            <p className='text-black'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-              quis impedit dignissimos itaque molestias harum assumenda est sit
-              quas? Cum omnis, amet mollitia quaerat optio a quis minus deleniti
-              dolores?
-            </p>
+            <p className='text-black'>{data.data.description}</p>
           </div>
           <div
             id='horizontal-alignment-2'

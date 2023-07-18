@@ -1,7 +1,7 @@
 export const fillterLaps = [
-  { id: 1, title: 'BUSINESS LAPTOP' },
-  { id: 2, title: 'CONSUMER LAPTOPS' },
-  { id: 3, title: 'GAMING LAPTOPS' },
+  { id: 1, title: 'Business' },
+  { id: 2, title: 'Consumer' },
+  { id: 3, title: 'Gaming' },
 ];
 
 export const fillterBrand = [
@@ -19,7 +19,7 @@ export const fillterBrand = [
   },
   {
     id: 4,
-    title: 'ASER',
+    title: 'Acer',
   },
   {
     id: 5,
@@ -27,7 +27,7 @@ export const fillterBrand = [
   },
   {
     id: 6,
-    title: 'GiGABYTE',
+    title: 'GIGABYTE',
   },
 ];
 

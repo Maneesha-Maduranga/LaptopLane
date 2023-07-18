@@ -1,6 +1,6 @@
-import buisness from '../assets/buisness.jpg';
-import gaming from '../assets/gaming.jpg';
-import consumer from '../assets/consumer.jpg';
+import buisness from '../assets/buisness.webp';
+import gaming from '../assets/gaming.webp';
+import consumer from '../assets/consumer.webp';
 import { brand } from '../Utils/brand';
 import Brandcard from '../Components/BrandCard';
 

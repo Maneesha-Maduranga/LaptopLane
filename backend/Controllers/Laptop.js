@@ -3,18 +3,21 @@ const CustomError = require('../Utiils/customError');
 const path = require('path');
 
 const getAllLaptop = async (req, res) => {
-  const { search, brand, catergory, processor, ram, sort } = req.query;
+  const { search, brand, catergory, processor, ram, sort, price } = req.query;
 
   let quearyOption = {};
 
   if (search) {
     quearyOption.name = new RegExp(search, 'i');
   }
+  if (price) {
+    quearyOption.price = price;
+  }
   if (brand) {
-    quearyOption.brand = brand;
+    quearyOption.brand = new RegExp(brand, 'i');
   }
   if (catergory) {
-    quearyOption.catergory = catergory;
+    quearyOption.catergory = new RegExp(catergory, 'i');
   }
   if (processor) {
     quearyOption.processor = new RegExp(processor, 'i');
@@ -33,7 +36,7 @@ const getAllLaptop = async (req, res) => {
   }
 
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 6;
+  const limit = Number(req.query.limit) || 9;
   const skip = (page - 1) * limit;
 
   result = result.skip(skip).limit(limit);
@@ -80,7 +83,7 @@ const createLaptop = async (req, res) => {
     storage,
     battery,
     graphics,
-    warrenty,
+    warranty,
     displaytype,
     resolution,
     size,
@@ -103,7 +106,7 @@ const createLaptop = async (req, res) => {
     storage: storage,
     battery: battery,
     graphics: graphics,
-    warrenty: warrenty,
+    warranty: warranty,
     display: { displaytype: displaytype, resolution: resolution, size: size },
     general: { os: os, model: model, colours: colours },
     stock: Number(stock),

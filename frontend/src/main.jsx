@@ -32,11 +32,12 @@ import AdminLayout from './Layout/AdminLayout.jsx';
 import AboutScreen from './Screen/AboutScreen.jsx';
 import ContactScreen from './Screen/ContactScreen.jsx';
 import ProductsScreen from './Screen/Admin/ProductsScreen.jsx';
+import ErrorPage from './Screen/ErrorPage';
 import AddProduct from './Screen/Admin/AddProducts.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path='/' element={<App />} errorElement={<ErrorPage />}>
       <Route index element={<HomeScreen />} />
       <Route path='/products/' element={<ProductScreen />} />
       <Route path='/about' element={<AboutScreen />} />

@@ -15,7 +15,7 @@ const laptopApi = api.injectEndpoints({
           page,
         },
       }),
-
+      providesTags: ['Laptops'],
       keepUnusedDataFor: 5,
     }),
     getLaptopAdmin: build.query({
@@ -27,6 +27,7 @@ const laptopApi = api.injectEndpoints({
       query: (id) => ({
         url: `/laptop/${id}`,
       }),
+      providesTags: ['Laptop'],
       keepUnusedDataFor: 5,
     }),
     createLaptop: build.mutation({

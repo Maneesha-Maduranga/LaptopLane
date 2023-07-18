@@ -5,9 +5,7 @@ function Paginate({ count, pages }) {
     <div className='flex flex-col md:flex-row  items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
       <div>
         <p className='text-sm text-gray-700'>
-          Showing <span className='font-medium'>1</span> to{' '}
-          <span className='font-medium'>6</span> of{' '}
-          <span className='font-medium'>{count}</span> results
+          <span className='font-medium mx-1'>{count}</span> results
         </p>
       </div>
       <div>
