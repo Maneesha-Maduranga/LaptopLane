@@ -36,8 +36,8 @@ const OrderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending', 'failed', 'paid', 'delivered', 'canceled'],
-      default: 'pending',
+      enum: ['notPaid', 'failed', 'paid', 'delivered', 'canceled'],
+      default: 'notPaid',
     },
     paidAt: {
       type: Date,
@@ -46,7 +46,7 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    paymentIntentId: {
+    orderId: {
       type: String,
     },
   },

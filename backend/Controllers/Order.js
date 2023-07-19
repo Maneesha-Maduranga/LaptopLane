@@ -3,6 +3,8 @@ const { Order } = require('../Model/Order');
 const CustomError = require('../Utiils/customError');
 const { authorization } = require('../middleware/security');
 
+const md5 = require('crypto-js/md5');
+
 const getAllOrders = async (req, res) => {
   const orders = await Order.find({});
   res.status(200).json({
@@ -25,6 +27,7 @@ const getSingleOrders = async (req, res) => {
 };
 
 const getUserOrders = async (req, res) => {
+  // Todo
   res.send('Get User  Orders');
 };
 
@@ -66,6 +69,22 @@ const createOrder = async (req, res) => {
     throw new CustomError('Amount Is Incorrect', 400);
   }
 
+  //Generating Hash Value
+  let merchantSecret = process.env.PAYMENTSECREAT;
+  let merchantId = process.env.PAYMENTSECREAT.PAYMENTID;
+  let orderId = req.user.id.toString();
+  let totalPrice = amount;
+  let hashedSecret = md5(merchantSecret).toString().toUpperCase();
+  let amountFormated = parseFloat(totalPrice)
+    .toLocaleString('en-us', { minimumFractionDigits: 2 })
+    .replaceAll(',', '');
+  let currency = 'LKR';
+  let hash = md5(
+    merchantId + orderId + amountFormated + currency + hashedSecret
+  )
+    .toString()
+    .toUpperCase();
+
   let order = await Order.create({
     user: req.user.id,
     orderItems: orderItems,
@@ -76,31 +95,19 @@ const createOrder = async (req, res) => {
       postalCode: shippingAddress.postalCode,
       state: shippingAddress.state,
     },
-    clientSecret: 'sss',
+    clientSecret: hash,
     amount: amount,
+    orderId: req.user.id.toString(),
     total: total,
   });
-
   res.status(201).json({
     sucess: true,
     data: order,
   });
 };
 
-const create_PaymentIntent = async (req, res) => {
-  const { amount } = req.body;
-
-  const stripe = require('stripe')(process.env.STRIPESECREAT);
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: amount,
-    currency: 'usd',
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
+const create_PaymentHash = async (req, res) => {
+  res.send('Create payement');
 };
 
 const updateOrders = async (req, res) => {
@@ -113,5 +120,5 @@ module.exports = {
   getUserOrders,
   createOrder,
   updateOrders,
-  create_PaymentIntent,
+  create_PaymentHash,
 };

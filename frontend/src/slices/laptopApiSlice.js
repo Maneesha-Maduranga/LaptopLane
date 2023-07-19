@@ -18,6 +18,11 @@ const laptopApi = api.injectEndpoints({
       providesTags: ['Laptops'],
       keepUnusedDataFor: 5,
     }),
+    getLaptopDiscount: build.query({
+      query: () => ({
+        url: '/laptop/discount',
+      }),
+    }),
     getLaptopAdmin: build.query({
       query: () => ({
         url: '/laptop',
@@ -77,4 +82,5 @@ export const {
   useGetLaptopAdminQuery,
   useCreateLaptopMutation,
   useUploadImageMutation,
+  useGetLaptopDiscountQuery,
 } = laptopApi;

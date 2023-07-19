@@ -1,7 +1,7 @@
 const { User } = require('../Model/User');
-const CustomError = require('../Utiils/customError');
+//Helper
 const { passwordValidator } = require('../Utiils/password');
-const { authorization } = require('../middleware/security');
+const CustomError = require('../Utiils/customError');
 
 const getAllUser = async (req, res) => {
   const users = await User.find({ role: 'user' }).select('-password');

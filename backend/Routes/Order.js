@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-
+//Security
 const { roleAccess, authentication } = require('../middleware/security');
-
+//Controllers
 const {
   getAllOrders,
   getSingleOrders,
   getUserOrders,
   createOrder,
   updateOrders,
-  create_PaymentIntent,
+  create_PaymentHash,
 } = require('../Controllers/Order');
 
 router.get('/', authentication, roleAccess('admin'), getAllOrders);
 
 router.post('/', authentication, createOrder);
 
-router.post('/createPayment', authentication, create_PaymentIntent);
+router.post('/createPayment', authentication, create_PaymentHash);
 
 router.get('/myOrders', authentication, getUserOrders);
 

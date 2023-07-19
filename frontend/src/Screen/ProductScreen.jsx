@@ -22,8 +22,6 @@ import { useGetLaptopQuery } from '../slices/laptopApiSlice';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Paginate from '../Components/Paginate';
 import NoProduct from '../Components/NoProduct';
-import Button from '../Components/Button';
-import PriceSlider from '../Components/PriceSlider';
 
 function ProductScreen() {
   const { page } = useParams();

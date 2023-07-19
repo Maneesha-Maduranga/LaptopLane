@@ -1,17 +1,20 @@
 const express = require('express');
+const router = express.Router();
+
+//Controllers
 const {
   getAllLaptop,
   getSingleLaptop,
+  getDiscountLaptops,
   createLaptop,
-
   deleteLaptop,
   uploadImageLaptop,
 } = require('../Controllers/Laptop');
-const router = express.Router();
-
+//Securirity
 const { roleAccess, authentication } = require('../middleware/security');
 
 router.post('/upload', authentication, roleAccess('admin'), uploadImageLaptop);
+router.get('/discount', getDiscountLaptops);
 
 router.get('/', getAllLaptop);
 

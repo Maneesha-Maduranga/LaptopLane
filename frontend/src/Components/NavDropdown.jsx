@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { BsChevronDown } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+
+import { BsChevronDown } from 'react-icons/bs';
 
 function NavDropDown() {
   const [showDrop, setShowDrop] = useState(false);

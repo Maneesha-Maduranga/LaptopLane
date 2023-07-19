@@ -9,7 +9,23 @@ const orderApi = api.injectEndpoints({
         body: data,
       }),
     }),
+    getSingleOrder: build.query({
+      query: (id) => ({
+        url: `/order/${id}`,
+      }),
+    }),
+    payOrder: build.mutation({
+      query: (data) => ({
+        url: 'https://sandbox.payhere.lk/pay/checkout',
+        method: 'POST',
+        data: data,
+      }),
+    }),
   }),
 });
 
-export const { useCreateOrderMutation } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetSingleOrderQuery,
+  usePayOrderMutation,
+} = orderApi;

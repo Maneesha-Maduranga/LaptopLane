@@ -1,6 +1,9 @@
+// Models
 const { Laptop } = require('../Model/Laptop');
 const { Review } = require('../Model/Review');
+//Helper
 const CustomError = require('../Utiils/customError');
+//Security
 const { authorization } = require('../middleware/security');
 
 const getAllReviews = async (req, res) => {

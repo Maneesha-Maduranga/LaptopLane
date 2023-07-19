@@ -1,4 +1,6 @@
 const express = require('express');
+const router = express.Router();
+
 const {
   getAllReviews,
   getSingleReview,
@@ -6,9 +8,8 @@ const {
   updateReview,
   deleteReview,
 } = require('../Controllers/Review');
-const router = express.Router();
 
-const { roleAccess, authentication } = require('../middleware/security');
+const { authentication } = require('../middleware/security');
 
 router.get('/', getAllReviews);
 

@@ -1,7 +1,7 @@
-import { CiLocationOn, CiCreditCard2, CiReceipt } from 'react-icons/ci';
+import { CiLocationOn, CiReceipt, CiMoneyBill } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 
-function Steps({ addres, summary }) {
+function Steps({ addres, summary, pay }) {
   return (
     <div className='w-1/2 mx-auto mb-5'>
       <div className='overflow-hidden rounded-full bg-gray-200'>
@@ -27,16 +27,30 @@ function Steps({ addres, summary }) {
         )}
         {summary ? (
           <Link
-            className='flex items-center justify-end sm:gap-1.5'
+            className='flex items-center justify-center sm:gap-1.5  text-blue-600 cursor-pointer'
             to='/orderDetail'
           >
             <span className='hidden sm:inline'> Order Summary </span>
             <CiReceipt />
           </Link>
         ) : (
-          <li className='flex items-center justify-end sm:gap-1.5'>
+          <li className='flex items-center justify-center sm:gap-1.5  text-blue-600'>
             <span className='hidden sm:inline'> Order Summary </span>
             <CiReceipt />
+          </li>
+        )}
+        {pay ? (
+          <Link
+            className='flex items-center justify-end sm:gap-1.5 text-blue-600 cursor-pointer'
+            to='/pay'
+          >
+            <span className='hidden sm:inline'> Pay </span>
+            <CiMoneyBill />
+          </Link>
+        ) : (
+          <li className='flex items-center justify-end sm:gap-1.5 text-blue-600'>
+            <span className='hidden sm:inline'> Pay </span>
+            <CiMoneyBill />
           </li>
         )}
       </ol>

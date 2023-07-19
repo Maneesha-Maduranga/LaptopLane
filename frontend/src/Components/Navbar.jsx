@@ -124,7 +124,7 @@ function Navbar() {
             {/* Conditionaliy Render Signout & Admin */}
             {user ? (
               <>
-                <NavLink>{`Hello ${user.name}`}</NavLink>
+                <h1>{`Hello ${user.name}`}</h1>
                 {user.role === 'admin' && (
                   <div className='px-4 hidden md:block'>
                     <NavDropDown />

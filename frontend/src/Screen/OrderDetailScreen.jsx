@@ -3,7 +3,7 @@ import Steps from '../Components/Steps';
 import { useSelector } from 'react-redux';
 import { api } from '../Utils/api';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
 import { useCreateOrderMutation } from '../slices/orderApiSlice';
 
 function OrderDetailScreen() {
@@ -25,13 +25,22 @@ function OrderDetailScreen() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await createOrder({
-      orderItems: cartItems,
-      shippingAddress: shippingAddress,
-      amount: amount,
-      total: total,
-    }).unwrap();
-    console.log(res);
+    try {
+      const { data } = await createOrder({
+        orderItems: cartItems,
+        shippingAddress: shippingAddress,
+        amount: amount,
+        total: total,
+      }).unwrap();
+
+      navigate(`/payment/${data._id}`);
+    } catch (error) {
+      if (error?.data?.error) {
+        return toast.error(error?.data?.error);
+      }
+
+      toast.error('Cart Details Incorrect');
+    }
   };
 
   return (
@@ -46,8 +55,8 @@ function OrderDetailScreen() {
             <div className='mx-auto max-w-lg space-y-8 px-4 lg:px-8'>
               <p className=' text-sm text-gray-600'>Total Price</p>
 
-              <p className='text-2xl font-medium tracking-tight text-gray-900'>
-                {`$ ${amount}`}
+              <p className='text-2xl font-medium tracking-wide text-gray-900 '>
+                {`රු:${amount}.00`}
               </p>
 
               <div>
@@ -183,7 +192,7 @@ function OrderDetailScreen() {
                 </div>
                 <div className='col-span-6'>
                   <button className='block w-full rounded-md bg-slate-900 p-2.5 text-sm text-white transition hover:shadow-lg'>
-                    PROCEED TO PAY 💸
+                    Create Order 💸
                   </button>
                 </div>
               </form>

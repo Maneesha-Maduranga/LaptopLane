@@ -2,6 +2,7 @@ import { BsHeart } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 import { api } from '../Utils/api';
+import noImage from '../assets/noImage.png';
 
 function ProductCard({ laptop }) {
   return (
@@ -10,7 +11,7 @@ function ProductCard({ laptop }) {
       className='group relative block overflow-hidden border-2 border-b-gray-200'
     >
       <img
-        src={`${api}/${laptop.image}`}
+        src={laptop.image ? `${api}/${laptop.image}` : noImage}
         alt={laptop.name}
         className='h-60 lg:64 w-full object-cover transition duration-500 group-hover:scale-105 '
       />

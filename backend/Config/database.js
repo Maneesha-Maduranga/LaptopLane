@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//Connect DataBase
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.CLOUDBDURL);

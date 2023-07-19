@@ -71,6 +71,16 @@ const LaptopSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Stock  is Required Field'],
     },
+    discount: {
+      discountItem: {
+        type: String,
+        enum: {
+          values: ['yes', 'no'],
+        },
+        default: 'no',
+      },
+      discountPrice: { type: Number, default: 0 },
+    },
     description: {
       type: String,
     },
@@ -82,6 +92,7 @@ const LaptopSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

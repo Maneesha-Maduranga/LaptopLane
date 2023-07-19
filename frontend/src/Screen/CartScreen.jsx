@@ -1,11 +1,10 @@
-import { AiOutlineDelete, AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, clearCart } from '../slices/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../Utils/api';
 
 import cartImg from '../assets/cart.png';
-import { useEffect } from 'react';
 
 function CartScreen() {
   const { cartItems, amount } = useSelector((state) => state.cart);

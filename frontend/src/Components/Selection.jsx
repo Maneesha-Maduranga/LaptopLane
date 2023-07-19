@@ -1,4 +1,3 @@
-import { BsCheckLg } from 'react-icons/bs';
 import { useSearchParams } from 'react-router-dom';
 
 function Selection() {

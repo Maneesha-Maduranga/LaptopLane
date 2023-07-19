@@ -21,7 +21,7 @@ function CheckoutScreen() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(shipaddress);
+
     dispatch(saveShippingAddress(shipaddress));
     navigate('/orderDetail');
   };

@@ -1,31 +1,44 @@
-import Rating from '../Components/Rating';
-import { BiComment, BiSend } from 'react-icons/bi';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
+//Components
 import Spinner from '../Components/Spinner';
-import { ToastContainer, toast } from 'react-toastify';
+import Rating from '../Components/Rating';
+//Icons
+import { BiComment, BiSend, BiArrowBack } from 'react-icons/bi';
+//Toast
+import { toast } from 'react-toastify';
+//redux
 import { useGetLaptopDetailQuery } from '../slices/laptopApiSlice';
 import { useCreateReviewMutation } from '../slices/reviewApiSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
+//Utils
 import { api } from '../Utils/api';
+//Photo
+import noImage from '../assets/noImage.png';
+
 function DetailScreen() {
-  const dispatch = useDispatch();
-
-  const { user } = useSelector((state) => state.user);
-
+  //Get Id In Params
   const { id } = useParams();
-  const { data, isLoading } = useGetLaptopDetailQuery(id);
 
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  //Fetch Laptop Details
+  const { data, isLoading } = useGetLaptopDetailQuery(id);
+  //Submit review
   const [createReview, { isError }] = useCreateReviewMutation();
-  console.log(data);
+
+  //Review
   const [review, setReview] = useState({
     rating: 0,
     description: '',
     laptopId: id,
   });
-
+  //For the Cart
   let lap;
+  //Actual Data
+  let laptop;
 
   if (!isLoading) {
     lap = {
@@ -34,12 +47,16 @@ function DetailScreen() {
       price: data.data.price,
       image: data.data.image,
     };
+
+    laptop = data.data;
   }
 
+  //Add to cart
   const handleAddToCart = () => {
     dispatch(addToCart(lap));
   };
 
+  //Submit Review
   const handleSubmit = async () => {
     if (review.description == '') {
       toast.error('Please Add Comment');
@@ -65,9 +82,20 @@ function DetailScreen() {
       <div className='relative mx-auto max-w-screen-xl px-4 py-8 mt-4'>
         <div className='grid grid-cols-1 gap-2 place-items-center md:items-center  md:grid-cols-2'>
           <div className='w-auto'>
+            {/* Top Navs */}
+            <nav className='hidden md:flex'>
+              <Link
+                className='py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-sky-400'
+                to='/products'
+              >
+                <BiArrowBack />
+                All Products
+              </Link>
+            </nav>
+            {/* Image */}
             <img
-              alt={data.data.name}
-              src={`${api}/${data.data.image}`}
+              alt={laptop.name}
+              src={laptop.image ? `${api}/${laptop.image}` : noImage}
               className='aspect-square rounded-xl object-cover'
             />
           </div>
@@ -75,24 +103,35 @@ function DetailScreen() {
           <div className='sticky top-0'>
             <div className='mt-3 flex flex-col items-start gap-1'>
               <div className='max-w-[35ch]'>
-                <h1 className='text-xl font-bold sm:text-2xl'>
-                  {data.data.name}
-                </h1>
+                <nav className='flex md:hidden'>
+                  <Link
+                    className='py-4 px-1 inline-flex items-center gap-2 border-b-[3px] border-transparent text-sm whitespace-nowrap text-gray-500 hover:text-sky-400'
+                    to='/products'
+                  >
+                    <BiArrowBack />
+                    All Products
+                  </Link>
+                </nav>
+                <h1 className='text-xl font-bold sm:text-2xl'>{laptop.name}</h1>
               </div>
+
               <div>
-                <p className='text-lg  font-bold'>{`රු: ${data.data.price}`}</p>
+                <p className='text-lg  font-bold'>{`රු: ${data.data.price}.00`}</p>
               </div>
+              <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-amber-200 text-gray-800'>
+                {laptop.stock}Stock
+              </span>
             </div>
 
             <div className='mt-4'>
               <ul className='list-disc list-inside text-gray-900'>
-                <li>{data.data.processor}</li>
-                <li>{data.data.ram}</li>
-                <li>{data.data.storage}</li>
-                <li>{data.data.graphics}</li>
-                <li>{data.data.battery}</li>
-                <li>{data.data.brand}</li>
-                <li>{data.data.warranty}</li>
+                <li>{laptop.processor}</li>
+                <li>{laptop.ram}</li>
+                <li>{laptop.storage}</li>
+                <li>{laptop.graphics}</li>
+                <li>{laptop.battery}</li>
+                <li>{laptop.brand}</li>
+                <li>{laptop.warranty}</li>
               </ul>
             </div>
             <form className='mt-8'>
@@ -103,13 +142,13 @@ function DetailScreen() {
 
                 <div className='flex flex-wrap gap-1'>
                   <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
-                    {data.data.brand}
+                    {laptop.brand}
                   </span>
                   <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
-                    {data.data.catergory}
+                    {laptop.catergory}
                   </span>
                   <span className='inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-sky-100 text-gray-800'>
-                    {data.data.processor}
+                    {laptop.processor}
                   </span>
                 </div>
               </fieldset>
@@ -150,7 +189,7 @@ function DetailScreen() {
               aria-controls='horizontal-alignment-2'
               role='tab'
             >
-              Reviews {data.data.reviews > 0 ? 0 : data.data.reviews.length}
+              Reviews {laptop.reviews > 0 ? 0 : laptop.reviews.length}
             </button>
           </nav>
         </div>
@@ -160,8 +199,46 @@ function DetailScreen() {
             id='horizontal-alignment-1'
             role='tabpanel'
             aria-labelledby='horizontal-alignment-item-1'
+            className=' flex flex-col gap-2 divide-y-2 divide-sky-200'
           >
-            <p className='text-black'>{data.data.description}</p>
+            <div className='flex flex-row items-center text-center justify-evenly ml-6 py-2'>
+              <h1 className='text-sm lg:text-base lg:font-semibold'>Display</h1>
+              <ul className='text-xs lg:text-sm'>
+                <li>Type</li>
+                <li>Resolution</li>
+                <li>Size</li>
+              </ul>
+              <ul className='text-xs lg:text-sm'>
+                <li>{laptop.display.displaytype}</li>
+                <li>{laptop.display.resolution}</li>
+                <li>{laptop.display.size}</li>
+              </ul>
+            </div>
+            <div className='flex flex-row items-center text-center justify-evenly py-2'>
+              <h1 className='text-sm lg:text-base lg:font-semibold'>General</h1>
+              <ul className='text-xs lg:text-sm'>
+                <li>Colors</li>
+                <li>Os</li>
+              </ul>
+              <ul className='text-xs lg:text-sm'>
+                <li>{laptop.general.colors}</li>
+                <li>{laptop.general.os}</li>
+              </ul>
+            </div>
+            <div className='flex flex-row items-center text-center justify-evenly py-2'>
+              <h1 className='text-sm lg:text-base lg:font-semibold'>Memory</h1>
+              <ul className='text-xs lg:text-sm'>
+                <li>Type</li>
+                <li>Speed</li>
+                <li>Capacity</li>
+              </ul>
+              <ul className='text-xs lg:text-sm'>
+                <li>{laptop.memory.capacity}</li>
+                <li>{laptop.memory.ramSpeed}</li>
+                <li>{laptop.memory.ramType}</li>
+              </ul>
+            </div>
+            <p className='text-black text-center py-4'>{laptop.description}</p>
           </div>
           <div
             id='horizontal-alignment-2'
@@ -171,16 +248,23 @@ function DetailScreen() {
           >
             <div className='flex flex-col gap-8 md:flex-row justify-around'>
               <ul className='space-y-3 text-sm'>
-                {data.data.reviews.length > 0 ? (
-                  data.data.reviews.map((review) => {
+                {laptop.reviews.length > 0 ? (
+                  laptop.reviews.map((review) => {
                     return (
-                      <li
-                        className='flex space-x-3 items-center'
-                        key={review._id}
-                      >
-                        <BiComment />
-                        <span className='text-black'>{review.description}</span>
-                      </li>
+                      <div key={review._id}>
+                        <li className='flex space-x-3 items-center'>
+                          <BiComment />
+                          <span className='text-black'>
+                            {review.description}
+                          </span>
+                          <span>
+                            <Rating rating={review.rating} />
+                          </span>
+                        </li>
+                        <span className='inline-block'>
+                          {review.createdAt.slice(0, 10)}
+                        </span>
+                      </div>
                     );
                   })
                 ) : (
@@ -193,7 +277,7 @@ function DetailScreen() {
                 )}
               </ul>
               {user ? (
-                <form className='flex flex-col gap-2 border-2 p-2 md:w-1/2 border-gray-200'>
+                <form className='flex flex-col gap-2 border-2 p-2 md:w-1/2 border-sky-100 rounded-2xl'>
                   <div>
                     <label
                       htmlFor='first_name'
@@ -204,7 +288,7 @@ function DetailScreen() {
                     <select
                       name='HeadlineAct'
                       id='HeadlineAct'
-                      className='w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm'
+                      className='w-full rounded-lg border-sky-200 text-gray-700 sm:text-sm'
                       value={review.rating}
                       onChange={(e) =>
                         setReview({ ...review, rating: e.target.value })
@@ -226,7 +310,7 @@ function DetailScreen() {
                       Comment
                     </label>
                     <textarea
-                      className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm'
+                      className='py-3 px-4 block w-full border-sky-200 rounded-md text-sm'
                       rows='2'
                       value={review.description}
                       onChange={(e) => {

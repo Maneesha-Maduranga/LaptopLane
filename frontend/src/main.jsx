@@ -34,6 +34,7 @@ import ContactScreen from './Screen/ContactScreen.jsx';
 import ProductsScreen from './Screen/Admin/ProductsScreen.jsx';
 import ErrorPage from './Screen/ErrorPage';
 import AddProduct from './Screen/Admin/AddProducts.jsx';
+import PaymentScreen from './Screen/PaymentScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
       <Route path='' element={<ProtectedLayout />}>
         <Route path='/checkout' element={<CheckoutScreen />} />
         <Route path='/orderDetail' element={<OrderDetailScreen />} />
+        <Route path='/payment/:id' element={<PaymentScreen />} />
       </Route>
       <Route path='' element={<AdminLayout />}>
         <Route path='/admin/products' element={<ProductsScreen />} />

@@ -1,7 +1,10 @@
+// Models
 const { User, userValidator } = require('../Model/User');
+// Helpers
 const CustomError = require('../Utiils/customError');
+const { sendCookie } = require('../Utiils/Jwt');
 
-const { createToken, sendCookie } = require('../Utiils/Jwt');
+//All Authentication Functions
 
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
@@ -13,7 +16,7 @@ const registerUser = async (req, res) => {
   }
 
   let user = await User.findOne({ email });
-
+  // Check user Allready Exist
   if (user) {
     throw new CustomError('Email Is Allready Used.Try Another One', 400);
   }
