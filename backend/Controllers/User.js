@@ -24,10 +24,11 @@ const getsingleUser = async (req, res) => {
   });
 };
 const showUser = async (req, res) => {
-  let { name, email, id } = req.user;
+  let { id } = req.user;
 
   const user = await User.findById({ _id: id })
-    .populate('orders')
+
+    .populate({ path: 'orders', select: 'shippingAddress orderItems status' })
     .select('-password');
 
   if (!user) {
@@ -37,9 +38,6 @@ const showUser = async (req, res) => {
   res.status(200).json({
     sucess: true,
     data: {
-      name,
-      email,
-      id,
       user,
     },
   });

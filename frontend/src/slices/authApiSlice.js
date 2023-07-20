@@ -22,8 +22,26 @@ const authApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
+    changePassword: build.mutation({
+      query: (data) => ({
+        url: '/user/update/password',
+        method: 'PATCH',
+        body: data,
+      }),
+    }),
+    profile: build.query({
+      query: () => ({
+        url: '/user/dashboard',
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation, useSignOutMutation } =
-  authApi;
+export const {
+  useSignInMutation,
+  useSignUpMutation,
+  useSignOutMutation,
+  useProfileQuery,
+  useChangePasswordMutation,
+} = authApi;

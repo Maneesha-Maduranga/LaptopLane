@@ -2,7 +2,6 @@ const { Laptop } = require('../Model/Laptop');
 const { Order } = require('../Model/Order');
 const CustomError = require('../Utiils/customError');
 const { authorization } = require('../middleware/security');
-
 const md5 = require('crypto-js/md5');
 
 const getAllOrders = async (req, res) => {

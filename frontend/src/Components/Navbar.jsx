@@ -124,7 +124,14 @@ function Navbar() {
             {/* Conditionaliy Render Signout & Admin */}
             {user ? (
               <>
-                <h1>{`Hello ${user.name}`}</h1>
+                <li>
+                  <NavLink
+                    className='flex items-center hover:text-sky-400 font-semibold'
+                    to='/profile'
+                  >
+                    {`Hello ${user.name}`}
+                  </NavLink>
+                </li>
                 {user.role === 'admin' && (
                   <div className='px-4 hidden md:block'>
                     <NavDropDown />
@@ -200,7 +207,10 @@ function Navbar() {
         <div className='w-full py-3 text-center  hover:text-sky-800'>
           {user ? (
             <>
-              <NavLink className='px-4 border-b-2 border-b-gray-50'>{`Hello ${user.name}`}</NavLink>
+              <NavLink
+                className='px-4 border-b-2 border-b-gray-50'
+                to='/profile'
+              >{`Hello ${user.name}`}</NavLink>
               {user.role === 'admin' && (
                 <>
                   <NavLink
