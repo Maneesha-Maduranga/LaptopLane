@@ -8,6 +8,14 @@ require('express-async-errors');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50,
+});
 
 //ENV
 const port = process.env.PORT || 5000;
@@ -25,6 +33,10 @@ const { notFound } = require('./middleware/notFound');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
+
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-site' } }));
+app.use(limiter);
+app.use(mongoSanitize());
 
 app.use(express.json());
 app.use(cors());

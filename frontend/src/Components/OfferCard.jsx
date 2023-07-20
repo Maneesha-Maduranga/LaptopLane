@@ -13,7 +13,7 @@ function OfferCard({ laptop }) {
     >
       <div>
         <img
-          src={laptop.image ? `${api}/${laptop.image}` : noImage}
+          src={laptop.image ? `${api}${laptop.image}` : noImage}
           alt=''
           className='h-40  opacity-100'
         />

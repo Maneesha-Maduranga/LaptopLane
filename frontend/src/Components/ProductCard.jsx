@@ -11,7 +11,7 @@ function ProductCard({ laptop }) {
       className='group relative block overflow-hidden border-2 border-b-gray-200'
     >
       <img
-        src={laptop.image ? `${api}/${laptop.image}` : noImage}
+        src={laptop.image ? `${api}${laptop.image}` : noImage}
         alt={laptop.name}
         className='h-60 lg:64 w-full object-cover transition duration-500 group-hover:scale-105 '
       />

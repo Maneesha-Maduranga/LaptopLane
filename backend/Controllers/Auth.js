@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = async (req, res) => {
-  res.cookie('Acess Token', '', {
+  res.cookie('Access_Token', '', {
     expires: new Date(Date.now()),
     httpOnly: true,
   });
