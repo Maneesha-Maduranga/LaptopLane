@@ -1,1 +1,1 @@
-export const api = 'http://localhost:5000/static';
+export const api = 'https://laptoplane.onrender.com/static';
