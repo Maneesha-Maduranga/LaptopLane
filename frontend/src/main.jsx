@@ -28,7 +28,7 @@ import SignInScreen from './Screen/SignInScreen';
 import SignUpScreen from './Screen/SignUpScreen';
 import CartScreen from './Screen/CartScreen.jsx';
 import CheckoutScreen from './Screen/CheckoutScreen.jsx';
-import ProtectedLayout from './Layout/protectedLayout.jsx';
+import ProtectedLayout from './Layout/ProtectedLayout.jsx';
 import OrderDetailScreen from './Screen/OrderDetailScreen';
 import AdminLayout from './Layout/AdminLayout.jsx';
 import AboutScreen from './Screen/AboutScreen.jsx';
