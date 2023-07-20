@@ -12,10 +12,10 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 50,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 50,
+// });
 
 //ENV
 const port = process.env.PORT || 5000;
@@ -35,7 +35,7 @@ const { errorHandler } = require('./middleware/errorHandler');
 const app = express();
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-site' } }));
-app.use(limiter);
+// app.use(limiter);
 app.use(mongoSanitize());
 
 app.use(express.json());
@@ -47,9 +47,6 @@ app.use(fileUpload());
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 // Home Routes
-app.get('/', (req, res) => {
-  res.send('Laptop Store MERN APPLICATION');
-});
 
 // Additional Routes
 app.use('/api/laptop/', LaptopRouter);
@@ -57,6 +54,20 @@ app.use('/api/auth/', authRouter);
 app.use('/api/user/', userRouter);
 app.use('/api/review/', reviewRouter);
 app.use('/api/order/', orderRouter);
+
+if (process.env.NODE_ENV === 'Production') {
+  const __dirname = path.resolve();
+
+  app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('Laptop Store MERN APPLICATION');
+  });
+}
 
 //Middleware
 app.use(notFound);
