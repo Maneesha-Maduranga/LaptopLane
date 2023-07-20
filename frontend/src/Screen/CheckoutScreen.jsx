@@ -27,7 +27,7 @@ function CheckoutScreen() {
   };
 
   return (
-    <div className='bg-white py-12 md:py-24'>
+    <div className='bg-white py-12 md:py-24 mt-14 lg:mt-0'>
       <Steps />
       <div className='mx-auto max-w-lg px-4 lg:px-8'>
         <form className='grid grid-cols-6 gap-4' onSubmit={handleSubmit}>

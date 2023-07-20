@@ -8,20 +8,17 @@ const {
   getSingleOrders,
   getUserOrders,
   createOrder,
-  updateOrders,
-  create_PaymentHash,
+  updateOrdertoPaid,
 } = require('../Controllers/Order');
 
 router.get('/', authentication, roleAccess('admin'), getAllOrders);
 
 router.post('/', authentication, createOrder);
 
-router.post('/createPayment', authentication, create_PaymentHash);
-
 router.get('/myOrders', authentication, getUserOrders);
 
 router.get('/:id', authentication, getSingleOrders);
 
-router.patch('/update/:id', authentication, updateOrders);
+router.patch('/updateToPay/:id', authentication, updateOrdertoPaid);
 
 module.exports = router;

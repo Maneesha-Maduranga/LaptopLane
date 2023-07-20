@@ -211,12 +211,6 @@ function Navbar() {
                   </NavLink>
                 </>
               )}
-              <NavLink
-                onClick={handleSignout}
-                className='px-4 border-b-2 border-b-gray-50'
-              >
-                Sign Out
-              </NavLink>
             </>
           ) : (
             <NavLink
@@ -227,67 +221,19 @@ function Navbar() {
             </NavLink>
           )}
         </div>
+        <div className='w-full py-3 text-center  hover:text-sky-800'>
+          {user && (
+            <NavLink
+              onClick={handleSignout}
+              className='px-4 border-b-2  border-b-gray-50'
+            >
+              Sign Out
+            </NavLink>
+          )}
+        </div>
       </div>
     </>
   );
 }
 
 export default Navbar;
-
-{
-  /* Large View */
-}
-
-// {/* Mobile View */}
-
-// <div
-// className={
-//   showNav
-//     ? `absolute md:hidden p-6 rounded-lg bg-slate-900 left-6 right-6 top-20 z-20 opacity-90`
-//     : 'hidden'
-// }
-// >
-// <div className='flex flex-col items-center justify-center w-full space-y-6 font-bold text-white rounded-sm'>
-//   <NavLink to='/cart' className='px-4 border-b-2 border-b-gray-50'>
-//     Cart
-//   </NavLink>
-
-//   {user ? (
-//     <>
-//       <NavLink className='px-4 border-b-2 border-b-gray-50'>Profile</NavLink>
-//       {user.role === 'admin' && (
-//         <>
-//           <NavLink
-//             className='px-4 border-b-2 border-b-gray-50'
-//             to='/admin/products'
-//           >
-//             View Products
-//           </NavLink>
-//           <NavLink
-//             className='px-4 border-b-2 border-b-gray-50'
-//             to='/admin/orders'
-//           >
-//             View Orders
-//           </NavLink>
-//           <NavLink
-//             className='px-4 border-b-2 border-b-gray-50'
-//             to='/admin/users'
-//           >
-//             View Users
-//           </NavLink>
-//         </>
-//       )}
-//       <NavLink
-//         onClick={handleSignout}
-//         className='px-4 border-b-2 border-b-gray-50'
-//       >
-//         Sign Out
-//       </NavLink>
-//     </>
-//   ) : (
-//     <NavLink to='auth/signin' className='px-4 border-b-2 border-b-gray-50'>
-//       Sign In
-//     </NavLink>
-//   )}
-// </div>
-// </div>

@@ -29,6 +29,7 @@ const getSingleReview = async (req, res) => {
 
 const createReviews = async (req, res) => {
   const { laptopId, rating, description } = req.body;
+
   let laptop = await Laptop.findById({ _id: laptopId });
   if (!laptop) {
     throw new CustomError('No Laptop Found for the Review', 404);

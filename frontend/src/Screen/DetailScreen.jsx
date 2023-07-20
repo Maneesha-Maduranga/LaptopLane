@@ -63,8 +63,10 @@ function DetailScreen() {
       return;
     }
     try {
+      console.log(review);
       const { error } = await createReview(review);
-      setReview({ rating: 0, description: '' });
+      setReview({ rating: 0, description: '', laptopId: id });
+
       if (!error) {
         toast.info('Review Submited');
       } else {

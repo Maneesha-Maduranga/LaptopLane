@@ -50,10 +50,10 @@ function SearchBar() {
       ) : (
         <button
           type='submit'
-          className='absolute right-0 top-0 mt-5 mr-4'
+          className='absolute right-0 top-0 mt-3 mr-4 '
           onClick={handleClick}
         >
-          <BsEraser />
+          <BsEraser color='red' size={28} />
         </button>
       )}
     </form>

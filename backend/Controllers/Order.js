@@ -17,7 +17,7 @@ const getSingleOrders = async (req, res) => {
   const { id } = req.params;
   const order = await Order.findById({ _id: id });
   if (!order) {
-    throw new CustomError('No Order Found With Given Id');
+    throw new CustomError('No Order Found With Given Id', 404);
   }
   authorization(req.user, order.user);
   res.status(200).json({
@@ -71,7 +71,7 @@ const createOrder = async (req, res) => {
 
   //Generating Hash Value
   let merchantSecret = process.env.PAYMENTSECREAT;
-  let merchantId = process.env.PAYMENTSECREAT.PAYMENTID;
+  let merchantId = process.env.PAYMENTID;
   let orderId = req.user.id.toString();
   let totalPrice = amount;
   let hashedSecret = md5(merchantSecret).toString().toUpperCase();
@@ -106,12 +106,20 @@ const createOrder = async (req, res) => {
   });
 };
 
-const create_PaymentHash = async (req, res) => {
-  res.send('Create payement');
-};
-
-const updateOrders = async (req, res) => {
-  res.send('Update Orders');
+const updateOrdertoPaid = async (req, res) => {
+  const { id } = req.params;
+  let order = await Order.findById({ _id: id });
+  if (!order) {
+    throw new CustomError('No Order Found With Given Id', 404);
+  }
+  authorization(req.user, order.user);
+  order.status = 'paid';
+  order.paidAt = new Date().toJSON();
+  await order.save();
+  res.status(201).json({
+    sucess: true,
+    data: order,
+  });
 };
 
 module.exports = {
@@ -119,6 +127,5 @@ module.exports = {
   getSingleOrders,
   getUserOrders,
   createOrder,
-  updateOrders,
-  create_PaymentHash,
+  updateOrdertoPaid,
 };

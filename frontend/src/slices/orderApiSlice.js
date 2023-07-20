@@ -13,13 +13,14 @@ const orderApi = api.injectEndpoints({
       query: (id) => ({
         url: `/order/${id}`,
       }),
+      providesTags: ['Orders'],
     }),
-    payOrder: build.mutation({
-      query: (data) => ({
-        url: 'https://sandbox.payhere.lk/pay/checkout',
-        method: 'POST',
-        data: data,
+    setOrderToPay: build.mutation({
+      query: (id) => ({
+        url: `/order/updateToPay/${id}`,
+        method: 'PATCH',
       }),
+      invalidatesTags: ['Orders'],
     }),
   }),
 });
@@ -28,4 +29,5 @@ export const {
   useCreateOrderMutation,
   useGetSingleOrderQuery,
   usePayOrderMutation,
+  useSetOrderToPayMutation,
 } = orderApi;

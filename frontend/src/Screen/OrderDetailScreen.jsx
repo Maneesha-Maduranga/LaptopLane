@@ -46,7 +46,7 @@ function OrderDetailScreen() {
   return (
     <>
       <section>
-        <div className='bg-white pt-12 md:pt-24'>
+        <div className='bg-white pt-12 md:pt-24 mt-14 lg:mt-0'>
           <Steps addres={true} />
         </div>
 
