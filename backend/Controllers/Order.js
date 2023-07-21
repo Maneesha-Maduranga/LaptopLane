@@ -75,8 +75,8 @@ const createOrder = async (req, res) => {
   let hashedSecret = md5(merchantSecret).toString().toUpperCase();
 
   let totalPrice = amount;
-  const formattedNumber = totalPrice.toString().replaceAll('.', ',');
-  const amountFormated = parseFloat(formattedNumber).toLocaleString();
+
+  const amountFormated = totalPrice.toLocaleString().replace(/\./g, ',');
 
   let currency = 'LKR';
   let hash = md5(
