@@ -40,7 +40,8 @@ app.use(
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        'script-src': ["'self'", 'https://www.payhere.lk'],
+        defaultSrc: ["'self'"], // Allow resources to be loaded from the same origin
+        connectSrc: ["'self'", 'https://sandbox.payhere.lk/pay/checkout'], // Allow network connections to these origins
       },
     },
   })
