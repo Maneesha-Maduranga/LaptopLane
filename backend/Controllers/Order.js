@@ -72,18 +72,23 @@ const createOrder = async (req, res) => {
   let merchantSecret = process.env.PAYMENTSECREAT;
   let merchantId = process.env.PAYMENTID;
   let orderId = req.user.id.toString();
-  let hashedSecret = md5(merchantSecret).toString().toUpperCase();
-
-  let totalPrice = amount;
-
-  const amountFormated = totalPrice.toLocaleString().replace(/\./g, ',');
-
   let currency = 'LKR';
-  let hash = md5(
-    merchantId + orderId + amountFormated + currency + hashedSecret
-  )
-    .toString()
-    .toUpperCase();
+
+  async function createHash(merchantId, orderId, amount, currency) {
+    const merchantSecret = process.env.PAYMENTSECREAT;
+    let hash = md5(
+      merchantId +
+        orderId +
+        amount +
+        currency +
+        md5(merchantSecret).toString().toUpperCase()
+    )
+      .toString()
+      .toUpperCase();
+    return hash;
+  }
+
+  let hash = await createHash(merchantId, orderId, total, currency);
 
   let order = await Order.create({
     user: req.user.id,
@@ -100,6 +105,7 @@ const createOrder = async (req, res) => {
     orderId: req.user.id.toString(),
     total: total,
   });
+
   res.status(201).json({
     sucess: true,
     data: order,
