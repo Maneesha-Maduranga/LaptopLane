@@ -34,7 +34,12 @@ const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
-app.use(helmet({ crossOriginResourcePolicy: { policy: 'same-site' } }));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'same-site' },
+    contentSecurityPolicy: false,
+  })
+);
 // app.use(limiter);
 app.use(mongoSanitize());
 

@@ -71,7 +71,7 @@ function ProductScreen() {
       <div
         className={
           showFillter
-            ? `fixed top-0 right-0 h-full w-1/2 overflow-y-auto shadow-xl bg-white z-20 ease-in-out duration-500`
+            ? `fixed top-0 right-0 h-full w-2/3 overflow-y-auto shadow-xl bg-white z-20 ease-in-out duration-500`
             : ` bg-white z-20 ease-in-out duration-500 fixed  top-0 right-[-100%]`
         }
       >
@@ -81,7 +81,7 @@ function ProductScreen() {
 
             <button
               type='button'
-              className='-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400'
+              className='-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-slate-300 p-2 text-gray-400'
               onClick={() => {
                 setShowFillter(!showFillter);
               }}
@@ -90,11 +90,15 @@ function ProductScreen() {
             </button>
           </div>
           <form
-            className='flex flex-col px-4 gap-4 py-8 text-sm'
+            className='flex flex-col px-4 gap-4 py-1 text-sm'
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
+            <Sorting name='Catergory' products={fillterLaps} />
+            <Sorting name='FILTER BY PROCESSOR' products={fillterProcesser} />
+            <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
+            <Sorting name='FILTER BY BRAND' products={fillterBrand} />
             <button
               className='flex items-center text-sm hover:text-gray-300'
               onClick={handleClick}
@@ -104,10 +108,6 @@ function ProductScreen() {
                 <HiXMark />
               </span>
             </button>
-            <Sorting name='Catergory' products={fillterLaps} />
-            <Sorting name='FILTER BY PROCESSOR' products={fillterProcesser} />
-            <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
-            <Sorting name='FILTER BY BRAND' products={fillterBrand} />
           </form>
         </div>
       </div>

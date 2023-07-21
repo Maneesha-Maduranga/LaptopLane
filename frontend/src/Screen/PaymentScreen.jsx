@@ -52,7 +52,7 @@ function PaymentScreen() {
 
   window.payhere.onCompleted = async function onCompleted(orderId) {
     const res = await setOrderToPay(id);
-    // console.log(res);
+
     toast.success('Payment SucceFull');
     dispatch(clearCart());
     setFirstName('');
@@ -68,10 +68,7 @@ function PaymentScreen() {
   };
 
   window.payhere.onError = function onError(error) {
-    // Note: show an error page
     toast.error(error);
-    // console.log('Error:' + error);
-    // console.log('Error');
   };
 
   const handleClick = () => {

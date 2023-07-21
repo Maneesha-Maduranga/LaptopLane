@@ -42,7 +42,7 @@ function SignInScreen() {
     setPassword('');
     try {
       const { data } = await signIn({ email, password }).unwrap();
-      // console.log(data);
+
       dispatch(storeUser(data));
       toast.success('Sign In');
     } catch (err) {
@@ -75,7 +75,7 @@ function SignInScreen() {
           <div className='relative'>
             <input
               type='email'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Enter email'
               value={email}
               onChange={(e) => {
@@ -93,7 +93,7 @@ function SignInScreen() {
           <div className='relative'>
             <input
               type='password'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Enter password'
               value={password}
               onChange={(e) => {
