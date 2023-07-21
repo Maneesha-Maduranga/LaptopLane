@@ -1,7 +1,7 @@
 const CustomError = require('../Utiils/customError');
 
 const errorHandler = (err, req, res, next) => {
-  // console.log(err);
+  console.log(err);
   if (err.name == 'CastError') {
     return res.status(400).json({ error: 'Bad Object Id', sucess: false });
   }
