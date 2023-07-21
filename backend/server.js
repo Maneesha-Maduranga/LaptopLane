@@ -37,12 +37,7 @@ const app = express();
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: 'same-site' },
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        'script-src': ["'self'", 'https://www.payhere.lk'],
-      },
-    },
+    contentSecurityPolicy: false,
   })
 );
 // app.use(limiter);
