@@ -72,11 +72,12 @@ const createOrder = async (req, res) => {
   let merchantSecret = process.env.PAYMENTSECREAT;
   let merchantId = process.env.PAYMENTID;
   let orderId = req.user.id.toString();
-  let totalPrice = amount;
   let hashedSecret = md5(merchantSecret).toString().toUpperCase();
-  let amountFormated = parseFloat(totalPrice)
-    .toLocaleString('en-us', { minimumFractionDigits: 2 })
-    .replaceAll(',', '');
+
+  let totalPrice = amount;
+  const formattedNumber = totalPrice.toString().replaceAll('.', ',');
+  const amountFormated = parseFloat(formattedNumber).toLocaleString();
+
   let currency = 'LKR';
   let hash = md5(
     merchantId + orderId + amountFormated + currency + hashedSecret
