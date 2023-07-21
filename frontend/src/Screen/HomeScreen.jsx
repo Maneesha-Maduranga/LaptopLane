@@ -74,7 +74,7 @@ function HomeScreen() {
           <div className='relative'>
             <img src={consumer} alt='Laptop1' />
 
-            <div className='absolute top-5  right-10 w-1/2 text-white  font-semibold text-right opacity-90'>
+            <div className='absolute top-5  right-14 w-1/2 text-white  font-semibold text-right opacity-90'>
               <div className='italic text-4xl lg:text-5xl  opacity-90'>
                 Consumer Laptops
               </div>

@@ -100,7 +100,7 @@ function ProductScreen() {
             <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
             <Sorting name='FILTER BY BRAND' products={fillterBrand} />
             <button
-              className='flex items-center text-sm font-bold hover:text-gray-300'
+              className='flex items-center text-sm font-bold my-4 hover:text-gray-300 py-2'
               onClick={handleClick}
             >
               Clear Filters
