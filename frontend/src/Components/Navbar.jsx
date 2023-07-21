@@ -186,7 +186,7 @@ function Navbar() {
         className={
           showNav
             ? `hidden`
-            : `fixed top-24 inset-0 z-20  flex-col items-center self-end w-full h-full m-h-screen px-6 py-1 pt-24 pb-4 tracking-widest text-white uppercase divide-y divide-white opacity-90 bg-sky-400`
+            : `fixed top-24 inset-0 z-20  flex-col items-center self-end w-full  h-screen px-6 py-1 pt-10 pb-4 tracking-widest text-white uppercase divide-y divide-white opacity-90 bg-sky-400`
         }
       >
         <div className='w-full py-3 text-center hover:text-sky-800'>

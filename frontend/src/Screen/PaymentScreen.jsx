@@ -31,10 +31,10 @@ function PaymentScreen() {
   if (!isLoading) {
     payment = {
       sandbox: true,
-      merchant_id: '1223552',
-      return_url: 'http://localhost:5173/', // Important
-      cancel_url: 'http://localhost:5173/products', // Important
-      notify_url: 'http://sample.com/notify',
+      merchant_id: 1223552,
+      return_url: 'https://laptoplane.onrender.com/api/', // Important
+      cancel_url: 'https://laptoplane.onrender.com/api/', // Important
+
       order_id: data.data.orderId,
       items: data.data.orderId,
       amount: data.data.amount,
@@ -52,7 +52,7 @@ function PaymentScreen() {
 
   window.payhere.onCompleted = async function onCompleted(orderId) {
     const res = await setOrderToPay(id);
-    // console.log(res);
+
     toast.success('Payment SucceFull');
     dispatch(clearCart());
     setFirstName('');
@@ -68,10 +68,7 @@ function PaymentScreen() {
   };
 
   window.payhere.onError = function onError(error) {
-    // Note: show an error page
     toast.error(error);
-    // console.log('Error:' + error);
-    // console.log('Error');
   };
 
   const handleClick = () => {

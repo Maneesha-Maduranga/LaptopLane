@@ -25,7 +25,7 @@ const errorHandler = (err, req, res, next) => {
       .status(err.statusCode)
       .json({ error: err.message, sucess: false });
   } else {
-    return res.status(500).send('Something Failed Please try Again');
+    return res.status(500).send('Somthing Wrong,Pllease Try Again');
   }
 };
 

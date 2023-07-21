@@ -59,7 +59,7 @@ function SignUpScreen() {
           <div className='relative'>
             <input
               type='text'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Enter User Name'
               value={credential.username}
               onChange={(e) => {
@@ -77,7 +77,7 @@ function SignUpScreen() {
           <div className='relative'>
             <input
               type='email'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Enter email'
               value={credential.email}
               onChange={(e) => {
@@ -95,7 +95,7 @@ function SignUpScreen() {
           <div className='relative'>
             <input
               type='password'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200  p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Enter password'
               value={credential.password}
               onChange={(e) => {
@@ -112,7 +112,7 @@ function SignUpScreen() {
           <div className='relative'>
             <input
               type='password'
-              className='w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm'
+              className='w-full rounded-lg border-gray-200 p-2 lg:p-4 pe-12 text-sm shadow-sm'
               placeholder='Confirm Password'
               value={credential.passwordTwo}
               onChange={(e) => {
@@ -126,7 +126,7 @@ function SignUpScreen() {
           <div>
             <button
               type='submit'
-              className='inline-block rounded-lg bg-sky-600 px-5 py-3 text-sm font-medium text-white'
+              className='inline-block rounded-lg bg-sky-600 px-5 py-2 text-sm font-medium text-white'
             >
               Sign Up
             </button>
