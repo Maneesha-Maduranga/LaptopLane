@@ -35,6 +35,7 @@ function OrderDetailScreen() {
 
       navigate(`/payment/${data._id}`);
     } catch (error) {
+      console.log(error);
       if (error?.data?.error) {
         return toast.error(error?.data?.error);
       }
