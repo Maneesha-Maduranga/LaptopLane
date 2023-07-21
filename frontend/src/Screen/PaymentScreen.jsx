@@ -32,8 +32,8 @@ function PaymentScreen() {
     payment = {
       sandbox: true,
       merchant_id: '1223552',
-      return_url: 'http://localhost:5173/', // Important
-      cancel_url: 'http://localhost:5173/products', // Important
+      return_url: 'https://laptoplane.onrender.com/', // Important
+      cancel_url: 'https://laptoplane.onrender.com/', // Important
       notify_url: 'http://sample.com/notify',
       order_id: data.data.orderId,
       items: data.data.orderId,
