@@ -35,7 +35,7 @@ function HomeScreen() {
                     ease: [0, 0.71, 0.2, 1.01],
                   }}
                 >
-                  <h1 className='text-4xl md:text-4xl lg:text-5xl text-left  italic font-extrabold md:font-semibold text-sky-900'>
+                  <h1 className='text-3xl px-2 md:text-4xl lg:text-5xl text-left  italic font-extrabold md:font-semibold text-sky-900'>
                     Discover the Power of Portability
                   </h1>
                 </motion.div>

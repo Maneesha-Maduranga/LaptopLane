@@ -25,7 +25,7 @@ function SearchBar() {
 
   return (
     <form
-      className='pt-2 relative mx-auto text-gray-600 w-auto'
+      className='pt-2 relative mx-4 text-gray-600 w-auto'
       onSubmit={handleSubmit}
     >
       <input

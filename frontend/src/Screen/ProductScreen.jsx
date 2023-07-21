@@ -71,7 +71,7 @@ function ProductScreen() {
       <div
         className={
           showFillter
-            ? `fixed top-0 right-0 h-full w-2/3 overflow-y-auto shadow-xl bg-white z-20 ease-in-out duration-500`
+            ? `fixed top-0 right-0 h-full max-w-screen-sm overflow-y-auto shadow-xl bg-white z-20 ease-in-out duration-500`
             : ` bg-white z-20 ease-in-out duration-500 fixed  top-0 right-[-100%]`
         }
       >
@@ -90,7 +90,7 @@ function ProductScreen() {
             </button>
           </div>
           <form
-            className='flex flex-col px-4 gap-4 py-1 text-sm'
+            className='flex flex-col px-4 gap-4 py-1 text-sm  divide-y divide-gray-500'
             onSubmit={(e) => {
               e.preventDefault();
             }}
@@ -100,7 +100,7 @@ function ProductScreen() {
             <Sorting name='FILTER BY MEMORY' products={fillterMemory} />
             <Sorting name='FILTER BY BRAND' products={fillterBrand} />
             <button
-              className='flex items-center text-sm hover:text-gray-300'
+              className='flex items-center text-sm font-bold hover:text-gray-300'
               onClick={handleClick}
             >
               Clear Filters
@@ -159,7 +159,7 @@ function ProductScreen() {
               <Sorting name='FILTER BY BRAND' products={fillterBrand} />
 
               <button
-                className='flex items-center text-sm hover:text-gray-300'
+                className='flex items-center text-sm  hover:text-gray-300 my-4'
                 onClick={handleClick}
               >
                 Clear Filters
