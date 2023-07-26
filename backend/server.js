@@ -12,6 +12,11 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 
+//docs
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+let docs = YAML.load(path.join(__dirname, 'docs.yaml'));
+
 // const limiter = rateLimit({
 //   windowMs: 15 * 60 * 1000, // 15 minutes
 //   max: 50,
@@ -59,6 +64,8 @@ app.use('/api/auth/', authRouter);
 app.use('/api/user/', userRouter);
 app.use('/api/review/', reviewRouter);
 app.use('/api/order/', orderRouter);
+//Docs
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(docs));
 
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();

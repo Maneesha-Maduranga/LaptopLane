@@ -1,0 +1,793 @@
+openapi: 3.0.0
+info:
+  title: LaptopLane
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://laptoplane.onrender.com/api
+    variables: {}
+paths:
+  /:
+    get:
+      tags:
+        - Home
+      summary: Home Page
+      operationId: HomePage
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /doc:
+    get:
+      tags:
+        - Home
+      summary: api documentation
+      operationId: api documentation
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+                - example:
+                    username: Test
+                    email: Test@gmail.com
+                    password: '123456'
+            example:
+              username: Test
+              email: Test@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LoginUserRequest'
+                - example:
+                    email: Test@gmail.com
+                    password: '123456'
+            example:
+              email: Test@gmail.com
+              password: '123456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout User
+      operationId: LogoutUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get All Users
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the user id
+    get:
+      tags:
+        - User
+      summary: Get single user
+      operationId: Getsingleuser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/dashboard:
+    get:
+      tags:
+        - User
+      summary: Show Me
+      operationId: ShowMe
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/update/password:
+    patch:
+      tags:
+        - User
+      summary: Update User Password
+      operationId: UpdateUserPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateUserPasswordRequest'
+                - example:
+                    oldPassword: '123456'
+                    newPassword: Password
+            example:
+              oldPassword: '123456'
+              newPassword: Password
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /laptop:
+    get:
+      tags:
+        - Laptop
+      summary: Get All Laptops
+      operationId: GetAllLaptops
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Laptop
+      summary: Create Laptop
+      operationId: CreateLaptop
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateLaptopRequest'
+                - example:
+                    name: MSI Modern 15 B13M
+                    price: 249000
+                    image: /images/msi06.webp
+                    brand: MSI
+                    processor: Intel Core i5 1335U Processor
+                    ram: 16GB DDR4 3200MHz RAM
+                    ramType: DDR4
+                    ramSpeed: 3200 Mhz
+                    capacity: 16GB Ram DDR4
+                    storage: 512GB PCIe NVMe SSD
+                    battery: 4-cell, 50 Wh Li-ion
+                    graphics: Intel Iris Xe Graphics
+                    warranty: 1 Year International Warranty
+                    displaytype: IPS
+                    resolution: FHD (1920 x 1080)
+                    size: 13.5 Inches Display
+                    os: Windows 11 Home
+                    model: New
+                    colours: Silver
+                    stock: 3
+                    description: Brighten your life with all-new Modern Series! Slim, powerful, and stylish – the Modern 15 B13M   isloaded with all you need to pursue your passions in both work and play.
+                    catergory: Consumer
+                    user: 64b50ca20d1295a9dd47a7ff
+            example:
+              name: MSI Modern 15 B13M
+              price: 249000
+              image: /images/msi06.webp
+              brand: MSI
+              processor: Intel Core i5 1335U Processor
+              ram: 16GB DDR4 3200MHz RAM
+              ramType: DDR4
+              ramSpeed: 3200 Mhz
+              capacity: 16GB Ram DDR4
+              storage: 512GB PCIe NVMe SSD
+              battery: 4-cell, 50 Wh Li-ion
+              graphics: Intel Iris Xe Graphics
+              warranty: 1 Year International Warranty
+              displaytype: IPS
+              resolution: FHD (1920 x 1080)
+              size: 13.5 Inches Display
+              os: Windows 11 Home
+              model: New
+              colours: Silver
+              stock: 3
+              description: Brighten your life with all-new Modern Series! Slim, powerful, and stylish – the Modern 15 B13M   isloaded with all you need to pursue your passions in both work and play.
+              catergory: Consumer
+              user: 64b50ca20d1295a9dd47a7ff
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /laptop/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the Laptop id
+    get:
+      tags:
+        - Laptop
+      summary: Get Single Laptop
+      operationId: GetSingleLaptop
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+
+    delete:
+      tags:
+        - Laptop
+      summary: delete Laptop
+      operationId: deleteLaptop
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /laptop/upload:
+    post:
+      tags:
+        - Laptop
+      summary: Upload Image
+      operationId: UploadImage
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /laptop/discount:
+    get:
+      tags:
+        - Laptop
+      summary: Get Discount Laptops
+      operationId: GetDiscountLaptops
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /review:
+    get:
+      tags:
+        - Review
+      summary: Get All Review
+      operationId: GetAllReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Review
+      summary: Create Review
+      operationId: CreateReview
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateReviewRequest'
+                - example:
+                    rating: '4'
+                    description: Good Product User Three
+                    laptopId: 64b5559d1664bf3c69f7951b
+            example:
+              rating: '4'
+              description: Good Product User Three
+              laptopId: 64b5559d1664bf3c69f7951b
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /review/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the review id
+    get:
+      tags:
+        - Review
+      summary: Get Single Review
+      operationId: GetSingleReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+        - Review
+      summary: Update Review
+      operationId: UpdateReview
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateReviewRequest'
+                - example:
+                    rating: 5
+                    description: updated Comment
+            example:
+              rating: 5
+              description: updated Comment
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+    delete:
+      tags:
+        - Review
+      summary: Delete Review
+      operationId: DeleteReview
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /order:
+    get:
+      tags:
+        - Order
+      summary: Get All Orders
+      operationId: GetAllOrders
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Order
+      summary: Create Orders
+      operationId: CreateOrders
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateOrdersRequest'
+                - example:
+                    orderItems:
+                      - name: ASUS VivoBook Home Laptop
+                        image: /images/asus01.webp
+                        price: 10000
+                        _id: 64b553451664bf3c69f7950a
+                    shippingAddress:
+                      address: 260/4/A
+                      city: Ganemulla
+                      state: Wp
+                      postalCode: '11020'
+                      country: Sri Lamka
+                    amount: 10000
+                    total: '1'
+            example:
+              orderItems:
+                - name: ASUS VivoBook Home Laptop
+                  image: /images/asus01.webp
+                  price: 10000
+                  _id: 64b553451664bf3c69f7950a
+              shippingAddress:
+                address: 260/4/A
+                city: Ganemulla
+                state: Wp
+                postalCode: '11020'
+                country: Sri Lamka
+              amount: 10000
+              total: '1'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /order/updatetoPay/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the order id
+    patch:
+      tags:
+        - Order
+      summary: Update Order to Paid
+      operationId: UpdateOrdertoPaid
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+  /order/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: the order id
+    get:
+      tags:
+        - Order
+      summary: Get Single Order
+      operationId: GetSingleOrder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - username
+        - email
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        username: Test
+        email: Test@gmail.com
+        password: '123456'
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: Test@gmail.com
+        password: '123456'
+    UpdateUserPasswordRequest:
+      title: UpdateUserPasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        oldPassword: '123456'
+        newPassword: Password
+    CreateLaptopRequest:
+      title: CreateLaptopRequest
+      required:
+        - name
+        - price
+        - image
+        - brand
+        - processor
+        - ram
+        - ramType
+        - ramSpeed
+        - capacity
+        - storage
+        - battery
+        - graphics
+        - warranty
+        - displaytype
+        - resolution
+        - size
+        - os
+        - model
+        - colours
+        - stock
+        - description
+        - catergory
+        - user
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        image:
+          type: string
+        brand:
+          type: string
+        processor:
+          type: string
+        ram:
+          type: string
+        ramType:
+          type: string
+        ramSpeed:
+          type: string
+        capacity:
+          type: string
+        storage:
+          type: string
+        battery:
+          type: string
+        graphics:
+          type: string
+        warranty:
+          type: string
+        displaytype:
+          type: string
+        resolution:
+          type: string
+        size:
+          type: string
+        os:
+          type: string
+        model:
+          type: string
+        colours:
+          type: string
+        stock:
+          type: integer
+          format: int32
+        description:
+          type: string
+        catergory:
+          type: string
+        user:
+          type: string
+      example:
+        name: MSI Modern 15 B13M
+        price: 249000
+        image: /images/msi06.webp
+        brand: MSI
+        processor: Intel Core i5 1335U Processor
+        ram: 16GB DDR4 3200MHz RAM
+        ramType: DDR4
+        ramSpeed: 3200 Mhz
+        capacity: 16GB Ram DDR4
+        storage: 512GB PCIe NVMe SSD
+        battery: 4-cell, 50 Wh Li-ion
+        graphics: Intel Iris Xe Graphics
+        warranty: 1 Year International Warranty
+        displaytype: IPS
+        resolution: FHD (1920 x 1080)
+        size: 13.5 Inches Display
+        os: Windows 11 Home
+        model: New
+        colours: Silver
+        stock: 3
+        description: Brighten your life with all-new Modern Series! Slim, powerful, and stylish – the Modern 15 B13M   isloaded with all you need to pursue your passions in both work and play.
+        catergory: Consumer
+        user: 64b50ca20d1295a9dd47a7ff
+    CreateReviewRequest:
+      title: CreateReviewRequest
+      required:
+        - rating
+        - description
+        - laptopId
+      type: object
+      properties:
+        rating:
+          type: string
+        description:
+          type: string
+        laptopId:
+          type: string
+      example:
+        rating: '4'
+        description: Good Product User Three
+        laptopId: 64b5559d1664bf3c69f7951b
+    UpdateReviewRequest:
+      title: UpdateReviewRequest
+      required:
+        - rating
+        - description
+      type: object
+      properties:
+        rating:
+          type: integer
+          format: int32
+        description:
+          type: string
+      example:
+        rating: 5
+        description: updated Comment
+    CreateOrdersRequest:
+      title: CreateOrdersRequest
+      required:
+        - orderItems
+        - shippingAddress
+        - amount
+        - total
+      type: object
+      properties:
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+          description: ''
+        shippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/ShippingAddress'
+            - {}
+        amount:
+          type: integer
+          format: int32
+        total:
+          type: string
+      example:
+        orderItems:
+          - name: ASUS VivoBook Home Laptop
+            image: /images/asus01.webp
+            price: 10000
+            _id: 64b553451664bf3c69f7950a
+        shippingAddress:
+          address: 260/4/A
+          city: Ganemulla
+          state: Wp
+          postalCode: '11020'
+          country: Sri Lamka
+        amount: 10000
+        total: '1'
+    OrderItem:
+      title: OrderItem
+      required:
+        - name
+        - image
+        - price
+        - _id
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+        price:
+          type: integer
+          format: int32
+        _id:
+          type: string
+      example:
+        name: ASUS VivoBook Home Laptop
+        image: /images/asus01.webp
+        price: 10000
+        _id: 64b553451664bf3c69f7950a
+    ShippingAddress:
+      title: ShippingAddress
+      required:
+        - address
+        - city
+        - state
+        - postalCode
+        - country
+      type: object
+      properties:
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+      example:
+        address: 260/4/A
+        city: Ganemulla
+        state: Wp
+        postalCode: '11020'
+        country: Sri Lamka
+security:
+  - {}
+tags:
+  - name: Home
+  - name: Auth
+  - name: User
+  - name: Laptop
+  - name: Review
+  - name: Order

@@ -10,6 +10,7 @@ import HomeSkelton from '../Components/HomeSkelton';
 import { brand } from '../Utils/brand';
 import { useGetLaptopDiscountQuery } from '../slices/laptopApiSlice';
 
+import Marquee from 'react-fast-marquee';
 import { motion } from 'framer-motion';
 
 function HomeScreen() {
@@ -74,7 +75,7 @@ function HomeScreen() {
           <div className='relative'>
             <img src={consumer} alt='Laptop1' />
 
-            <div className='absolute top-5  right-15 w-1/2 text-white  font-semibold text-right opacity-90'>
+            <div className='absolute top-5  right-14 w-1/2 text-white  font-semibold text-right opacity-90'>
               <div className='italic text-4xl lg:text-5xl  opacity-90'>
                 Consumer Laptops
               </div>
@@ -91,12 +92,14 @@ function HomeScreen() {
           <div className='text-center italic text-2xl font-semibold text-sky-400'>
             Top brands
           </div>
-          <div className='flex flex-col gap-2 md:flex-row items-center justify-evenly my-4'>
-            {brand.map((item) => (
-              <div key={item.id}>
-                <Brandcard title={item.title} image={item.image} />
-              </div>
-            ))}
+          <div className='flex flex-row gap-14  items-center justify-evenly my-4'>
+            <Marquee>
+              {brand.map((item) => (
+                <div key={item.id}>
+                  <Brandcard title={item.title} image={item.image} />
+                </div>
+              ))}
+            </Marquee>
           </div>
         </div>
         <div>

@@ -118,7 +118,7 @@ function ProductScreen() {
           <h1 className='text-4xl italic font-bold text-white'>All Products</h1>
         </div>
 
-        <div className='flex items-center flex-col lg:flex-row gap-2 justify-between border-b-2 border-gray-200 pb-4 pt-10 my-4'>
+        <div className='flex items-center flex-col lg:flex-row gap-3 justify-between border-b-2 border-gray-200 pb-4 pt-10 my-4'>
           <div className='flex items-center justify-between'>
             <Selection />
             <TfiFilter
