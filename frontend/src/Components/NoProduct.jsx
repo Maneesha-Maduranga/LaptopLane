@@ -1,7 +1,7 @@
 function NoProduct() {
   return (
-    <div className='flex flex-col mx-10  h-screen bg-white'>
-      <h1 className='tracking-widest text-gray-500 uppercase'>
+    <div className='h-screen'>
+      <h1 className='tracking-widest text-gray-500 uppercase text-xl'>
         404 | Not Found
       </h1>
       <p>
