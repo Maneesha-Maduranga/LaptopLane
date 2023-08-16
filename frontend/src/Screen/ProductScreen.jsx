@@ -170,9 +170,6 @@ function ProductScreen() {
             </form>
           </div>
 
-          {!isLoading ? data.data.length <= 0 && <NoProduct /> : null}
-
-          {/* Products Grid */}
           <div
             className={
               gridFour
@@ -187,6 +184,16 @@ function ProductScreen() {
                   <Skeleton />
                 </div>
               ))}
+
+            {!isLoading
+              ? data.data.length <= 0 && (
+                  <div>
+                    <NoProduct />
+                  </div>
+                )
+              : null}
+
+            {/* Products Grid */}
 
             {/* Display Data */}
             {!isLoading &&
