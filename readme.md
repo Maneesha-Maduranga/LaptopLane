@@ -24,7 +24,6 @@
 - Backend: Node.js, Express, MongoDB
 - Payment Gateway: Payhere
 - State Management: Redux
-  Contributing
 
 ### We welcome contributions to LaptopLane!
 
